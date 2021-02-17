@@ -1,0 +1,99 @@
+variables:
+
+######################################
+# Agent settings
+######################################
+
+  vmImage: ''                             # Use this for Microsoft-hosted agents
+  poolName: 'IaCS Scale Set Linux'   # Use this for self-hosted agents
+  serviceConnection: 'SPN-ES-INT-IaCS-DEV-iacsowners-owner'
+
+######################################
+# Source
+######################################
+  modulesRepository: Components # The repository hosting the deployment code (i.e. 'Components'). MUST be provided as a variable with every pipeline
+  modulesPath: Modules/ARM
+  modulePath: $(modulesPath)/$(moduleName) # only use in module pielines
+  parametersPath: $(modulePath)/Parameters # only use in module pielines
+  templateFunctionsPath: $(modulesPath)/.global/PipelineTemplates/Scripts
+
+######################################
+# Validation deployment settings
+######################################
+
+  location: 'West Europe'
+  resourceGroupName: 'validation-rg' # validation-resourcegroup-name
+  dependencyResourceGroupName: 'dependencies-rg'
+
+######################################
+# General removal settings
+######################################
+  maximumRemovalRetries: 3 # Maximum number of retries to remove a resources in one pipeline run
+
+######################################
+# Components storage account settings
+######################################
+# Set to true, if you would like to publish modules as storage account artifacts
+  publishToStorageAccount: true
+  componentStorageAccountSubscriptionId: 8629be3b-96bc-482d-a04b-ffff597c65a2
+  componentStorageAccountRGName: 'artifacts-rg'
+  componentStorageAccountRGLocation: 'West Europe'
+  componentStorageAccountName: iacs
+  componentStorageContainerName: components
+
+######################################
+# Components template spec settings
+######################################
+# Set to true, if you would like to publish modules as template specs
+  publishToTemplateSpec: true
+  componentTemplateSpecRGName: 'artifacts-rg'
+  componentTemplateSpecRGLocation: 'West Europe'
+  componentTemplateSpecName: $(moduleName)
+  componentTemplateSpecDescription: components
+
+######################################
+# Universal Packages
+######################################
+
+# Set to true, if you would like to publish modules as Universal Packages (in ADO Artifacts)
+# If you provide a name below, you have to create an Artifact Feed in ADO with the same name before using this feed.
+  publishToArtifactsFeed: true
+  vstsFeedName: 'Modules'
+  vstsFeedProject: '$(System.TeamProject)'
+  vstsFeedOrganization: 'servicescode'
+
+######################################
+# Nuget Packages
+######################################
+
+# Set to true, if you would like to publish modules as Nuget Packages (in ADO Artifacts)
+# If you provide a name below, you have to create an Artifact Feed in ADO with the same name before using this feed.
+  publishToNugetArtifactsFeed: false
+  vstsNugetFeedName: 'Nuget-Modules'
+  vstNugetFeedUrl: 'https://pkgs.dev.azure.com/servicescode/infra-as-code-source/_packaging/Nuget-Modules/nuget/v2'
+
+######################################
+# Build Artifact
+######################################
+# Set to true, if you would like to publish modules as build artifacts
+  publishToBuildArtifacts: true
+
+######################################
+# Azure PowerShell Version
+######################################
+# Should be set to 'latestVersion' unless there is an issue with the Az PowerShell modules.
+# If a specific version needs to be set azurePowerShellVersion should be changed to 'OtherVersion'. 
+# NOTE: The strings are case sensitive and will not work unless properly entered.
+  azurePowerShellVersion: 'latestVersion'
+# If using the latest version of the Az PowerShell modules, set `preferredAzurePowerShellVersion` to an empty string ''.
+# If overriding the Az PowerShell module version, set to the version. Example: '4.4.0'
+  preferredAzurePowerShellVersion: ''
+#
+# NOTE: To override for just an individual template, just add the following to the
+#     templates pipeline.yml replacing '4.4.0' with the desired version:
+#
+#   - name: azurePowerShellVersion
+#     value: 'OtherVersion'
+#   - name: preferredAzurePowerShellVersion
+#     value: '4.4.0'
+#

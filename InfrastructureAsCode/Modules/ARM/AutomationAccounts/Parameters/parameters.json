@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "automationAccountName": {
+      "value": "sxx-wd-aut-weu-x-001"
+    },
+    // "roleAssignments": {
+    //     "value": [
+    //         {
+    //             "roleDefinitionIdOrName": "Desktop Virtualization User",
+    //             "principalIds": [
+    //                 "12345678-1234-1234-1234-123456789012", // object 1
+    //                 "78945612-1234-1234-1234-123456789012" // object 2
+    //             ]
+    //         }
+    //     ]
+    // },
+    "schedules": {
+      "value": [
+        {
+          "scheduleName": "ScalingRunbook_Schedule", // The schedule name.
+          "startTime": "", // Gets or sets the start time of the schedule.
+          "expiryTime": "9999-12-31T23:59:00+00:00", // Gets or sets the end time of the schedule.
+          "interval": 15, // Gets or sets the interval of the schedule.
+          "frequency": "Minute", // Gets or sets the frequency of the schedule. - OneTime, Day, Hour, Week, Month, Minute
+          "timeZone": "Europe/Berlin", // Gets or sets the time zone of the schedule.
+          "advancedSchedule": "" // Gets or sets the AdvancedSchedule
+        }
+      ]
+    }
+  }
+}

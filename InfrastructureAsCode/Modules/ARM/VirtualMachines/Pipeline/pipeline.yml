@@ -1,0 +1,96 @@
+name: $(moduleName)
+
+parameters:
+- name: versioningOption
+  displayName: Default publish version
+  type: string
+  default: patch
+  values:
+  - patch
+  - minor
+  - major
+- name: uiCustomVersion
+  displayName: -OR- Custom publish version
+  type: string
+  default: '-'
+- name: removeDeployment
+  displayName: Remove resources post-deployment
+  type: boolean
+  default: true
+- name: enablePostDeployment
+  displayName: Execute post-deployment
+  type: boolean
+  default: false
+
+variables:
+- template: /Modules/ARM/.global/global.variables.yml
+- name: moduleName
+  value: VirtualMachines
+- name: pipelineCustomVersion
+  value: 1.0.0
+# Module
+- name: vmName
+  value: SAZ0010
+- name: diskEncryptionKeyVault
+  value: sxx-az-kv-weu-x-004
+- name: diskEncryptionKeyVaultRG
+  value: dependencies-rg
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+    - master 
+  paths:
+    include:
+    - Modules/ARM/.global/*
+    - Modules/ARM/VirtualMachines/*
+    exclude:
+    - Modules/ARM/VirtualMachines/readme.md
+    
+stages:
+- stage: Validation
+  jobs:
+  - template: /Modules/ARM/.global/PipelineTemplates/pipeline.jobs.validate.yml
+    parameters:
+      deploymentBlocks:
+      - path: $(parametersPath)/parameters.json
+      
+- stage: Deployment
+  jobs:
+  - template: /Modules/ARM/.global/PipelineTemplates/pipeline.jobs.deploy.yml
+    parameters:
+      removeDeployment: '${{ parameters.removeDeployment }}'
+      deploymentBlocks:
+      - path: $(parametersPath)/parameters.json
+
+- stage: PostDeployment
+  dependsOn:
+  - Deployment
+  condition: and(succeeded(), eq( '${{ parameters.enablePostDeployment }}', 'true'))
+  jobs:
+  - template: pipeline.jobs.post.yml
+
+- stage: Publishing
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/main','refs/heads/master'))
+  dependsOn:
+  - ${{ if  eq( parameters.enablePostDeployment, true) }}:
+    - PostDeployment
+  - ${{ if  eq( parameters.enablePostDeployment, false) }}:
+    - Deployment
+  jobs:
+  - template: /Modules/ARM/.global/PipelineTemplates/pipeline.jobs.publish.yml
+    parameters:
+      versioningOption: '${{ parameters.versioningOption }}'
+      uiCustomVersion: '${{ parameters.uiCustomVersion }}'
+
+- stage: Removal
+  condition: and(succeededOrFailed(), eq( '${{ parameters.removeDeployment }}', 'true'))
+  dependsOn:
+  - ${{ if  eq( parameters.enablePostDeployment, true) }}:
+    - PostDeployment
+  - ${{ if  eq( parameters.enablePostDeployment, false) }}:
+    - Deployment
+  jobs:
+  - template: /Modules/ARM/.global/PipelineTemplates/pipeline.jobs.remove.yml

@@ -1,0 +1,135 @@
+#########################################################
+## REMOVAL PIPELINE                                    ##
+#########################################################
+##
+## This pipeline template is based on the templace 'pipeline.jobs.remove.yml' and contains the custom logic to remove VirtualWAN resources
+## that are identified by a special remove-tag.
+## In addition to the standard removal logic, the pipeline identifies resources related to the VirtualWAN (like VirtualHub, VPNGateway, VPNSite) and removes
+## them before attempting to remove the VirtualWAN itself.
+## As such, the script is only capable to remove deployed resource-group level services
+##
+#################################################################
+
+##---------------------------------------------##
+## TEMPLATE PARAMETERS                         ##
+##---------------------------------------------##
+##
+## By default it uses the variables specified in the below [parameters] section. However, you can overwrite these variables in the
+##    referencing pipeline by providing the paramater explicitly.
+##
+## NOTE: If you don't need to overwrite a shared value, you can IGNORE this section
+##
+##   |=========================================================================================================================================================|
+##   | Parameter                  | Default Value              | Description                                                        | Example                  |
+##   |----------------------------|---------------------====---|--------------------------------------------------------------------|--------------------------|
+##   | displayName                | 'Remove module'            | Name for the pipeline job                                          | 'Remove KeyVault'        |
+##   | serviceConnection          | '$(serviceConnection)'     | The service connection that connects to Azure                      | 'demo-internal'          |
+##   | poolName                   | '$(poolName)'              | You can provide either a [poolname] or [vmImage] to run the job on | 'Custom Deployment Pool' |
+##   | vmImage                    | '$(vmImage)'               | You can provide either a [poolname] or [vmImage] to run the job on | 'ubuntu20.04'            |
+##   | defaultJobTimeoutInMinutes | 120                        | The timeout for the job in this pipeline                           | 120                      |
+##   | moduleName                 | '$(moduleName)'            | The name of the module to remove                                   | 'KeyVault'               |
+##   | resourceGroupName          | '$(resourceGroupName)'     | The resourcegroup to remove the resource from                      | 'validation-rg'          |
+##   | maximumRemovalRetries      | '$(maximumRemovalRetries)' | Amount of times to retry a removal of resources in a loop          | 3                        |
+##   |=========================================================================================================================================================|
+##
+##---------------------------------------------##
+
+parameters:
+  # Pipeline-related parameters
+  displayName: "Remove module"
+  serviceConnection: "$(serviceConnection)"
+  poolName: "$(poolName)"
+  vmImage: "$(vmImage)"
+  defaultJobTimeoutInMinutes: 120
+
+  # Logic-related parameters
+  moduleName: "$(moduleName)"
+  resourceGroupName: "$(resourceGroupName)"
+  maximumRemovalRetries: "$(maximumRemovalRetries)"
+
+##---------------------------------------------##
+## TEMPLATE LOGIC                              ##
+##---------------------------------------------##
+jobs:
+  - job:
+    displayName: ${{ parameters.displayName }}
+    timeoutInMinutes: ${{ parameters.defaultJobTimeoutInMinutes }}
+    pool:
+      ${{ if ne(parameters.vmImage, '') }}:
+        vmImage: ${{ parameters.vmImage }}
+      ${{ if ne(parameters.poolName, '') }}:
+        name: ${{ parameters.poolName }}
+    steps:
+      - task: AzurePowerShell@4
+        displayName: "Remove [${{ parameters.moduleName }}] in [${{ parameters.resourceGroupName }}] via [${{ parameters.serviceConnection }}]"
+        inputs:
+          azureSubscription: ${{ parameters.serviceConnection }}
+          azurePowerShellVersion: LatestVersion
+          ScriptType: InlineScript
+          failOnStandardError: false
+          inline: |
+            function Remove-Resource {
+                param(
+                    $resourcesToRemove
+                )
+                $resourcesToRetry = @()
+                Write-Verbose "----------------------------------" -Verbose
+                foreach ($resource in $resourcesToRemove) {
+                    Write-Verbose ("Trying to remove resource [{0}] of type [{1}] from resource group [{2}]" -f $resource.Name, $resource.ResourceType, $resource.ResourceGroupName) -Verbose
+                    try {
+                        $null = Remove-AzResource -ResourceId $resource.ResourceId -Force -ErrorAction Stop
+                    }
+                    catch {
+                        Write-Warning ("Removal moved back for re-try. Reason: [{0}]" -f $_.Exception.Message)
+                        $resourcesToRetry += $resource
+                    }
+                }
+                Write-Verbose "----------------------------------" -Verbose
+                return $resourcesToRetry
+            }
+                
+            #Identifying resources
+            $virtualWAN = Get-AzResource -Tag @{ RemoveModule = "VirtualWAN"; } -ResourceGroupName "validation-rg"
+            if ($virtualWAN) {
+                $vWANResourceId = $virtualWAN.ResourceId
+
+                $virtualHub = Get-AzVirtualHub -ResourceGroupName validation-rg | Where-Object { $_.VirtualWan.Id -eq $vWANResourceId }
+                if ($virtualHub) {
+                    $virtualHubResourceId = $virtualHub.Id
+
+                    $vpnGateway = Get-AzVpnGateway -ResourceGroupName validation-rg | Where-Object { $_.VirtualHub.Id -eq $virtualHubResourceId }
+                    if ($vpnGateway) {
+                        $vpnGatewayResourceId = $vpnGateway.Id
+                    }
+                }
+
+                $vpnSite = Get-AzVpnSite -ResourceGroupName validation-rg | Where-Object { $_.VirtualWan.Id -eq $vWANResourceId }
+                if ($vpnSite) {
+                    $vpnSiteResourceId = $vpnSite.Id
+                }
+            }
+
+            #Building array of resources to remove (in the required order)
+            $resourcesToRemove = @()
+            if ($vpnGatewayResourceId) { $resourcesToRemove += Get-AzResource -ResourceId $vpnGatewayResourceId }
+            if ($virtualHubResourceId) { $resourcesToRemove += Get-AzResource -ResourceId $virtualHubResourceId }
+            if ($vpnSiteResourceId) { $resourcesToRemove += Get-AzResource -ResourceId $vpnSiteResourceId }
+            if ($vWANResourceId) { $resourcesToRemove += Get-AzResource -ResourceId $vWANResourceId }
+
+            if ($resourcesToRemove) {
+                $maximumRetries = '${{ parameters.maximumRemovalRetries }}' -as [int]
+                $currentRety = 0
+                $resourcesToRetry = @() 
+                Write-Verbose ("Init removal of [{0}] resources" -f $resourcesToRemove.Count) -Verbose
+                while (($resourcesToRetry = Remove-Resource -resourcesToRemove $resourcesToRemove).Count -gt 0 -and $currentRety -le $maximumRetries) {
+                    Write-Verbose ("Re-try removal of remaining [{0}] resources. Round [{1}|{2}]" -f $resourcesToRetry.Count, $currentRety, $maximumRetries) -Verbose
+                    $currentRety++
+                }
+
+                if ($resourcesToRetry.Count -gt 0) {
+                    throw ("The removal failed for resources [{0}]" -f ($resourcesToRetry.Name -join ', '))
+                }
+            }
+            else {
+                Write-Error ("Unable to find resources by tags [RemoveModule={0}] in resource group {1}." -f "${{ parameters.moduleName }}", "${{ parameters.resourceGroupName }}")
+            }

@@ -1,0 +1,347 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apiManagementServiceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Required. The name of the of the Api Management service."
+      }
+    },
+    "publisherEmail": {
+      "type": "string",
+      "metadata": {
+        "description": "Required. The email address of the owner of the service."
+      }
+    },
+    "publisherName": {
+      "type": "string",
+      "metadata": {
+        "description": "Required. The name of the owner of the service."
+      }
+    },
+    "notificationSenderEmail": {
+      "type": "string",
+      "defaultValue": "apimgmt-noreply@mail.windowsazure.com",
+      "metadata": {
+        "description": "Optional. The notification sender email address for the service."
+      }
+    },
+    "sku": {
+      "type": "string",
+      "defaultValue": "Developer",
+      "allowedValues": [
+        "Developer",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "metadata": {
+        "description": "Optional. The pricing tier of this Api Management service."
+      }
+    },
+    "skuCount": {
+      "type": "string",
+      "allowedValues": [
+        "1",
+        "2"
+      ],
+      "defaultValue": "1",
+      "metadata": {
+        "description": "Optional. The instance size of this Api Management service."
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Optional. Location for all Resources."
+      }
+    },
+    "zones": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Optional. A list of availability zones denoting where the resource needs to come from."
+      }
+    },
+    "identity": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Optional. Managed service identity of the Api Management service."
+      }
+    },
+    "hostnameConfigurations": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Optional. Custom hostname configuration of the API Management service."
+      }
+    },
+    "subnetResourceId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional. The full resource ID of a subnet in a virtual network to deploy the API Management service in."
+      }
+    },
+    "additionalLocations": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "Optional. Additional datacenter locations of the API Management service."
+      }
+    },
+    "customProperties": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Optional. Custom properties of the API Management service."
+      }
+    },
+    "certificates": {
+      "type": "array",
+      "maxLength": 10,
+      "defaultValue": [],
+      "metadata": {
+        "description": "Optional. List of Certificates that need to be installed in the API Management service. Max supported certificates that can be installed is 10."
+      }
+    },
+    "enableClientCertificate": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Optional. Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway."
+      }
+    },
+    "disableGateway": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Optional. Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in master region."
+      }
+    },
+    "virtualNetworkType": {
+      "type": "string",
+      "defaultValue": "None",
+      "allowedValues": [ "None", "External", "Internal" ],
+      "metadata": {
+        "description": "Optional. The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only."
+      }
+    },
+    "minApiVersion": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional. Limit control plane API calls to API Management service with version equal to or newer than this value."
+      }
+    },
+    "restore": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Optional. Undelete Api Management Service if it was previously soft-deleted. If this flag is specified and set to True all other properties will be ignored."
+      }
+    },
+    "diagnosticLogsRetentionInDays": {
+      "type": "int",
+      "defaultValue": 365,
+      "minValue": 0,
+      "maxValue": 365,
+      "metadata": {
+        "description": "Optional. Specifies the number of days that logs will be kept for; a value of 0 will retain data indefinitely."
+      }
+    },
+    "diagnosticStorageAccountId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional. Resource identifier of the Diagnostic Storage Account."
+      }
+    },
+    "workspaceId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional. Resource identifier of Log Analytics."
+      }
+    },
+    "eventHubAuthorizationRuleId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional. Resource ID of the event hub authorization rule for the Event Hubs namespace in which the event hub should be created or streamed to."
+      }
+    },
+    "eventHubName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional. Name of the event hub within the namespace to which logs are streamed. Without this, an event hub is created for each log category."
+      }
+    },
+    "lockForDeletion": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Optional. Switch to lock Key Vault from deletion."
+      }
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {
+      },
+      "metadata": {
+        "description": "Optional. Tags of the resource."
+      }
+    },
+    "cuaId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Optional. Customer Usage Attribution id (GUID). This GUID must be previously registered"
+      }
+    }
+  },
+  "variables": {
+    "diagnosticsMetrics": [
+      {
+        "category": "Gateway Requests",
+        "enabled": true,
+        "retentionPolicy": {
+          "days": "[parameters('diagnosticLogsRetentionInDays')]",
+          "enabled": true
+        }
+      },
+      {
+        "category": "Capacity",
+        "enabled": true,
+        "retentionPolicy": {
+          "days": "[parameters('diagnosticLogsRetentionInDays')]",
+          "enabled": true
+        }
+      },
+      {
+        "category": "EventHub Events",
+        "enabled": true,
+        "retentionPolicy": {
+          "days": "[parameters('diagnosticLogsRetentionInDays')]",
+          "enabled": true
+        }
+      }
+    ],
+    "diagnosticsLogs": [
+      {
+        "category": "GatewayLogs",
+        "enabled": true,
+        "retentionPolicy": {
+          "days": "[parameters('diagnosticLogsRetentionInDays')]",
+          "enabled": true
+        }
+      }
+    ]
+  },
+  "resources": [
+    {
+      "condition": "[not(empty(parameters('cuaId')))]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-06-01",
+      "name": "[concat('pid-', parameters('cuaId'))]",
+      "properties": {
+        "mode": "Incremental",
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "resources": [
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.ApiManagement/service",
+      "apiVersion": "2020-06-01-preview",
+      "name": "[parameters('apiManagementServiceName')]",
+      "location": "[parameters('location')]",
+      "tags": "[parameters('tags')]",
+      "sku": {
+        "name": "[parameters('sku')]",
+        "capacity": "[parameters('skuCount')]"
+      },
+      "zones": "[parameters('zones')]",
+      "identity": "[if(not(empty(parameters('identity'))), parameters('identity'), json(concat('{\"type\": \"None\"}')))]",
+      "properties": {
+        "publisherEmail": "[parameters('publisherEmail')]",
+        "publisherName": "[parameters('publisherName')]",
+        "notificationSenderEmail": "[parameters('notificationSenderEmail')]",
+        "hostnameConfigurations": "[parameters('hostnameConfigurations')]",        
+        "additionalLocations": "[parameters('additionalLocations')]",
+        "customProperties": "[parameters('customProperties')]",
+        "certificates": "[parameters('certificates')]",
+        "enableClientCertificate": "[if(parameters('enableClientCertificate'), 'true', json('null'))]",
+        "disableGateway": "[parameters('disableGateway')]",
+        "virtualNetworkType": "[parameters('virtualNetworkType')]",
+        "virtualNetworkConfiguration": "[if(not(empty(parameters('subnetResourceId'))), json(concat('{\"subnetResourceId\": \"', parameters('subnetResourceId'), '\"}')), json('null'))]",
+        "apiVersionConstraint": "[if(not(empty(parameters('minApiVersion'))), json(concat('{\"minApiVersion\": \"', parameters('minApiVersion'), '\"}')), json('null'))]",
+        "restore": "[parameters('restore')]"
+      },
+      "resources": [
+        {
+          "type": "providers/locks",
+          "apiVersion": "2016-09-01",
+          "condition": "[parameters('lockForDeletion')]",
+          "name": "Microsoft.Authorization/analysisServicesDoNotDelete",
+          "dependsOn": [
+            "[concat('Microsoft.ApiManagement/service/', parameters('apiManagementServiceName'))]"
+          ],
+          "comments": "Resource lock",
+          "properties": {
+            "level": "CannotDelete"
+          }
+        },
+        {
+          "type": "Microsoft.ApiManagement/service/providers/diagnosticsettings",
+          "apiVersion": "2017-05-01-preview",
+          "name": "[concat(parameters('apiManagementServiceName'), '/Microsoft.Insights/service')]",
+          "condition": "[or(not(empty(parameters('diagnosticStorageAccountId'))),not(empty(parameters('workspaceId'))),not(empty(parameters('eventHubAuthorizationRuleId'))),not(empty(parameters('eventHubName'))))]",
+          "dependsOn": [
+            "[concat('Microsoft.ApiManagement/service/', parameters('apiManagementServiceName'))]"
+          ],
+          "properties": {
+            "storageAccountId": "[if(empty(parameters('diagnosticStorageAccountId')), json('null'), parameters('diagnosticStorageAccountId'))]",
+            "workspaceId": "[if(empty(parameters('workspaceId')), json('null'), parameters('workspaceId'))]",
+            "eventHubAuthorizationRuleId": "[if(empty(parameters('eventHubAuthorizationRuleId')), json('null'), parameters('eventHubAuthorizationRuleId'))]",
+            "eventHubName": "[if(empty(parameters('eventHubName')), json('null'), parameters('eventHubName'))]",
+            "metrics": "[if(and(empty(parameters('diagnosticStorageAccountId')), empty(parameters('workspaceId')), empty(parameters('eventHubAuthorizationRuleId')), empty(parameters('eventHubName'))), json('null'), variables('diagnosticsMetrics'))]",
+            "logs": "[if(and(empty(parameters('diagnosticStorageAccountId')), empty(parameters('workspaceId')), empty(parameters('eventHubAuthorizationRuleId')), empty(parameters('eventHubName'))), json('null'), variables('diagnosticsLogs'))]"
+          }
+        }
+      ]
+    }
+  ],
+  "functions": [
+  ],
+  "outputs": {
+    "apimServiceName": {
+      "type": "string",
+      "value": "[parameters('apiManagementServiceName')]",
+      "metadata": {
+        "description": "The Api Management Service Name"
+      }
+    },
+    "apimServiceResourceId": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.ApiManagement/service', parameters('apiManagementServiceName'))]",
+      "metadata": {
+        "description": "The Resource Id of the Api Management Service"
+      }
+    },
+    "apimServiceResourceGroup": {
+      "type": "string",
+      "value": "[resourceGroup().name]",
+      "metadata": {
+        "description": "The name of the Resource Group with the Api Management Service"
+      }
+    }
+  }
+}

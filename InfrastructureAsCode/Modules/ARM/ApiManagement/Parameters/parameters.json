@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "apiManagementServiceName": {
+      "value": "sxx-az-am-weu-x-001"
+    },
+    "publisherEmail": {
+      "value": "apimgmt-noreply@mail.windowsazure.com"
+    },
+    "publisherName": {
+      "value": "sxx-az-amorg-weu-x-001"
+    },
+    "cuaId": {
+      "value": "00000-0-000000"
+    }
+  }
+}

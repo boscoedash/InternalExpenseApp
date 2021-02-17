@@ -1,0 +1,99 @@
+#########################################################
+## PESTER VALIDATION PIPELINE                          ##
+#########################################################
+##
+## This pipeline triggers global pester tests and publishes the results
+##
+#########################################################
+variables:
+- template: /Modules/ARM/.global/global.variables.yml
+
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+    - master 
+
+##----------------##
+## PIPELINE LOGIC ##
+##----------------##
+jobs:
+- job:
+  displayName: Run global tests
+  pool:
+    ${{ if eq(variables['vmImage'], '') }}:
+      name: $(poolName)
+    ${{ if eq(variables['poolName'], '') }}:
+      vmImage: $(vmImage)
+  steps:
+    - task: AzurePowerShell@5
+      displayName: 'Global Pester Test'
+      condition: succeeded()
+      inputs:
+        azureSubscription: $(serviceConnection)
+        azurePowerShellVersion: $(azurePowerShellVersion)
+        preferredAzurePowerShellVersion: $(preferredAzurePowerShellVersion)
+        ScriptType: InlineScript
+        inline: |
+          Install-Module Pester -Force -RequiredVersion 5.0.4
+
+          $PesterSettings  = @{
+            Script       = '$(System.DefaultWorkingDirectory)/Modules/ARM/.global/global.module.tests.ps1'
+            OutputFile   = '$(System.DefaultWorkingDirectory)/Modules/ARM/.global/global-testResults.xml'
+            ExcludeTag   = 'ApiCheck'   
+            OutputFormat = 'NUnitXml'
+            Show         = 'Default'
+          }
+          Invoke-Pester @PesterSettings
+      enabled: true
+
+    - task: PublishTestResults@2
+      displayName: Global Test Results
+      inputs:
+        testRunTitle: 'Global Test Results'
+        testResultsFormat: 'NUnit'
+        testResultsFiles: 'global-testResults.xml'
+        failTaskOnFailedTests: true
+        searchFolder: '$(System.DefaultWorkingDirectory)/Modules/ARM/.global'
+      condition: succeededOrFailed()
+      enabled: true
+
+- job:
+  displayName: Run global tests - API Version
+  condition: succeeded()
+  pool:
+    ${{ if eq(variables['vmImage'], '') }}:
+      name: $(poolName)
+    ${{ if eq(variables['poolName'], '') }}:
+      vmImage: $(vmImage)
+  steps:
+    - task: AzurePowerShell@4
+      displayName: 'Global Pester Test'
+      inputs:
+        azureSubscription: $(serviceConnection)
+        azurePowerShellVersion: LatestVersion
+        ScriptType: InlineScript
+        inline: |
+          Install-Module Pester -Force -RequiredVersion 5.0.2
+
+          $PesterSettings  = @{
+            Script       = '$(System.DefaultWorkingDirectory)/Modules/ARM/.global/global.module.tests.ps1'
+            OutputFile   = '$(System.DefaultWorkingDirectory)/Modules/ARM/.global/api-testResults.xml'
+            Tag          = 'ApiCheck'    
+            OutputFormat = 'NUnitXml'
+            Show         = 'Default'
+          }
+          Invoke-Pester @PesterSettings
+      enabled: true
+
+    - task: PublishTestResults@2
+      displayName: API Version Test Results
+      condition: succeededOrFailed()
+      inputs:
+        testRunTitle: 'API Version Test Results'
+        testResultsFormat: 'NUnit'
+        testResultsFiles: 'api-testResults.xml'
+        searchFolder: '$(System.DefaultWorkingDirectory)/Modules/ARM/.global'
+        failTaskOnFailedTests: true
+      enabled: true

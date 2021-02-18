@@ -22,3 +22,7 @@ variable "ase_subnet_address_space" {
   default     = "10.0.1.0/24"
   description = "subnet Address Space."
 }
+variable "app_service_environment_name" {
+  default     = "ase-internal-01"
+  description = "Name of the ASE."
+}

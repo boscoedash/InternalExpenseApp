@@ -32,3 +32,10 @@ module "ASESubnet" {
   virtual_network_name = module.VirtualNetwork.virtual_network_name
   subnet_address_space = var.ase_subnet_address_space
 }
+
+module "AppServiceEnvironment" {
+  source                       = "./InfrastructureAsCode/Modules/Terraform/AppServiceEnvironment"
+  app_service_environment_name = var.app_service_environment_name
+  resource_group_name          = var.resource_group_name
+  subnet_id                    = module.ASESubnet.subnet_id
+}

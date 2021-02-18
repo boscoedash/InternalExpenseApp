@@ -26,10 +26,7 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.INTERNAL_MAG_TENANT_ID }}
         ARM_ENVIRONMENT: usgovernment
         ARM_SKIP_PROVIDER_REGISTRATION: true
-        RESOURCE_GROUP_NAME: Terraform
-        STORAGE_ACCOUNT_NAME: bhlokanatfstate
-        CONTAINER_NAME: internal-expense-app-tfstate
-        ACCOUNT_KEY: ${{ secrets.TFSTATE_STORAGE_ACCOUNT_KEY }}
+        ARM_ACCESS_KEY: ${{ secrets.TFSTATE_STORAGE_ACCOUNT_KEY }}
 
       steps:
         - name: "Checkout"

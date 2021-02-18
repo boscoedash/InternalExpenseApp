@@ -23,6 +23,11 @@ jobs:
         - name: "Checkout"
           uses: actions/checkout@master
 
+        - name: "AZLogin"
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.INTERNAL_EXPENSE_APP_CREDENTIAL }}
+
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
 
@@ -41,17 +46,7 @@ jobs:
         - name: "Terraform Plan"
           id: plan
           run: terraform plan -no-color
-          env:
-            TF_VAR_agent_client_id: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_ID }}
-            TF_VAR_agent_client_secret: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_SECRET }}
-            TF_VAR_subscription_id: ${{ secrets.INTERNAL_MAG_SUBSCRIPTION_ID }}
-            TF_VAR_tenant_id: ${{ secrets.INTERNAL_MAG_TENANT_ID }}
 
         - name: "Terraform Apply"
           id: apply
           run: terraform apply
-          env:
-            TF_VAR_agent_client_id: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_ID }}
-            TF_VAR_agent_client_secret: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_SECRET }}
-            TF_VAR_subscription_id: ${{ secrets.INTERNAL_MAG_SUBSCRIPTION_ID }}
-            TF_VAR_tenant_id: ${{ secrets.INTERNAL_MAG_TENANT_ID }}

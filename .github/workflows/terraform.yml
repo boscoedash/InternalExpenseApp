@@ -58,9 +58,9 @@ jobs:
         
         - name: "Terraform Import"
           id: import
-          run: terraform import
+          run: terraform import -state-out=./terraform.tfstate
 
         - name: "Terraform Apply"
           id: apply
-          run: terraform apply -auto-approve
+          run: terraform apply -auto-approve -state=./terraform.tfstate
 

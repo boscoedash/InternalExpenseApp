@@ -42,16 +42,16 @@ jobs:
           id: plan
           run: terraform plan -no-color
           env:
-            TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-            TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-            TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-            TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+            TF_VAR_agent_client_id: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_ID }}
+            TF_VAR_agent_client_secret: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_SECRET }}
+            TF_VAR_subscription_id: ${{ secrets.INTERNAL_MAG_SUBSCRIPTION_ID }}
+            TF_VAR_tenant_id: ${{ secrets.INTERNAL_MAG_TENANT_ID }}
 
         - name: "Terraform Apply"
           id: apply
           run: terraform apply
           env:
-            TF_VAR_agent_client_id: ${{ secrets.TF_VAR_agent_client_id }}
-            TF_VAR_agent_client_secret: ${{ secrets.TF_VAR_agent_client_secret }}
-            TF_VAR_subscription_id: ${{ secrets.TF_VAR_subscription_id }}
-            TF_VAR_tenant_id: ${{ secrets.TF_VAR_tenant_id }}
+            TF_VAR_agent_client_id: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_ID }}
+            TF_VAR_agent_client_secret: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_SECRET }}
+            TF_VAR_subscription_id: ${{ secrets.INTERNAL_MAG_SUBSCRIPTION_ID }}
+            TF_VAR_tenant_id: ${{ secrets.INTERNAL_MAG_TENANT_ID }}

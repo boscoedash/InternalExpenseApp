@@ -19,6 +19,6 @@ variable "ase_subnet_name" {
   description = "Name of the ASE subnet."
 }
 variable "ase_subnet_address_space" {
-  default     = ["10.0.1.0/24"]
+  default     = "10.0.1.0/24"
   description = "subnet Address Space."
 }

@@ -3,6 +3,7 @@ terraform {
     resource_group_name   = "Terraform"
     storage_account_name  = "bhlokanatfstate"
     container_name        = "internal-expense-app-tfstate"
+    key                   = "terraform.tfstate"
   }
 }
 

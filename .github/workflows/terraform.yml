@@ -55,6 +55,10 @@ jobs:
         - name: "Terraform Plan"
           id: plan
           run: terraform plan -no-color
+        
+        - name: "Terraform Import"
+          id: import
+          run: terraform import
 
         - name: "Terraform Apply"
           id: apply

@@ -1,16 +1,6 @@
-variable "location" {
+variable "name" {
   type        = string
-  description = "The ASE location."
-}
-
-variable "description" {
-  type        = string
-  description = "The description of the resource for naming."
-}
-
-variable "counter" {
-  type    = number
-  default = 1
+  description = "The ASE name."
 }
 
 variable "resource_group_name" {
@@ -31,4 +21,14 @@ variable "pricing_tier" {
 variable "front_end_scale_factor" {
   type        = number
   description = "The ASE scale factor."
+}
+
+variable "internal_load_balancing_mode" {
+  type        = string
+  description = "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment. Possible values are None, Web, Publishing and combined value "Web, Publishing". Defaults to None."
+}
+
+variable "allowed_user_ip_cidrs" {
+  type        = number
+  description = "Pricing tier for the front end instances. Possible values are I1, I2 and I3. Defaults to I1."
 }

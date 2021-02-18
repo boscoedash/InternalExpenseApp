@@ -14,3 +14,11 @@ variable "virtual_network_address_space" {
   default     = "10.0.0.0/16"
   description = "vNet Address Space."
 }
+variable "ase_subnet_name" {
+  default     = "ase-subnet"
+  description = "Name of the ASE subnet."
+}
+variable "ase_subnet_address_space" {
+  default     = "10.0.1.0/24"
+  description = "subnet Address Space."
+}

@@ -1,6 +1,9 @@
 terraform {
-  backend "local" {
-    path = "./terraform.tfstate"
+ backend "azurerm" {
+    resource_group_name   = ${env.RESOURCE_GROUP_NAME}
+    storage_account_name  = ${env.STORAGE_ACCOUNT_NAME}
+    container_name        = ${env.CONTAINER_NAME}
+    key                   = ${env.ACCOUNT_KEY}
   }
 }
 

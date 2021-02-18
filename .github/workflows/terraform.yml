@@ -46,7 +46,7 @@ jobs:
 
         - name: "Terraform Init"
           id: init
-          run: terraform init
+          run: terraform init -lock=false
 
         - name: "Terraform Validate"
           id: validate
@@ -58,5 +58,5 @@ jobs:
 
         - name: "Terraform Apply"
           id: apply
-          run: terraform apply -auto-approve -state="./terraform.tfstate"
+          run: terraform apply -auto-approve
 

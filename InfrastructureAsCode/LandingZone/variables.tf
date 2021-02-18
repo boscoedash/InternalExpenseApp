@@ -1,9 +1,9 @@
 variable "resource_group_name" {
-  default     = ""
+  default     = "InternalExpenseApp_Demo"
   description = "Name of the resource group to place App Gateway in."
 }
 variable "resource_group_location" {
-  default     = ""
+  default     = "USGov Texas"
   description = "Location of the resource group to place App Gateway in."
 }
 variable "application_gateway_name" {

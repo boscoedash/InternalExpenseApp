@@ -32,10 +32,11 @@ jobs:
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1
 
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.INTERNAL_EXPENSE_APP_CREDENTIAL }}
-        environment: AzureUSGovernment
+        - name: "AZLogin"
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.INTERNAL_EXPENSE_APP_CREDENTIAL }}
+            environment: AzureUSGovernment
 
         - name: "Terraform Format"
           id: fmt

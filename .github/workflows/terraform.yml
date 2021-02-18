@@ -27,6 +27,7 @@ jobs:
           uses: azure/login@v1
           with:
             creds: ${{ secrets.INTERNAL_EXPENSE_APP_CREDENTIAL }}
+            environment: AzureUSGovernment
 
         - name: Setup Terraform
           uses: hashicorp/setup-terraform@v1

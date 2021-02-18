@@ -25,7 +25,7 @@ module "VirtualNetwork" {
   virtual_network_address_space = var.virtual_network_address_space
 }
 
-module "Subnet" {
+module "ASESubnet" {
   source               = "./InfrastructureAsCode/Modules/Terraform/Subnet"
   subnet_name          = var.ase_subnet_name
   resource_group_name  = var.resource_group_name

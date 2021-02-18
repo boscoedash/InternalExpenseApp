@@ -24,7 +24,7 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.INTERNAL_EXPENSE_APP_CLIENT_SECRET }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.INTERNAL_MAG_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ secrets.INTERNAL_MAG_TENANT_ID }}
-        ARM_ENVIRONMENT: AzureUSGovernment
+        ARM_ENVIRONMENT: usgovernment
 
       steps:
         - name: "Checkout"

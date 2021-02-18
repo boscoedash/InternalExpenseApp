@@ -23,15 +23,15 @@ jobs:
         - name: "Checkout"
           uses: actions/checkout@master
 
+        - name: Setup Terraform
+          uses: hashicorp/setup-terraform@v1
+
         - name: "AZLogin"
           uses: azure/login@v1
           with:
             creds: ${{ secrets.INTERNAL_EXPENSE_APP_CREDENTIAL }}
             environment: AzureUSGovernment
-
-        - name: Setup Terraform
-          uses: hashicorp/setup-terraform@v1
-
+            
         - name: "Terraform Format"
           id: fmt
           run: terraform fmt

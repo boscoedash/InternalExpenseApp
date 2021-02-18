@@ -32,3 +32,5 @@ module "ASESubnet" {
   virtual_network_name = module.VirtualNetwork.virtual_network_name
   subnet_address_space = var.ase_subnet_address_space
 }
+
+

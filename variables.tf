@@ -51,16 +51,16 @@ variable "app_service_name" {
 }
 variable "app_service_site_config" {
   default     = {
-    always_on                 = ""
+    always_on                 = false
     app_command_line          = ""
-    default_documents         = ""
+    default_documents         = [""]
     dotnet_framework_version  = "v4.0"
     ftps_state                = ""
-    http2_enabled             = ""
+    http2_enabled             = false
     java_version              = ""
     java_container            = ""
     java_container_version    = ""
-    local_mysql_enabled       = ""
+    local_mysql_enabled       = false
     linux_fx_version          = ""
     windows_fx_version        = ""
     managed_pipeline_mode     = ""

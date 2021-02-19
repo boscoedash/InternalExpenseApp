@@ -9,5 +9,5 @@ resource "azurerm_app_service_environment" "app_service_environment" {
   pricing_tier                 = var.pricing_tier
   front_end_scale_factor       = var.front_end_scale_factor
   internal_load_balancing_mode = var.internal_load_balancing_mode
-  allowed_user_ip_cidrs        = allowed_user_ip_cidrs
+  allowed_user_ip_cidrs        = var.allowed_user_ip_cidrs
 }

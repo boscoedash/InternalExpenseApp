@@ -1,8 +1,3 @@
-locals {
-
-  tags                         = var.tags == null ? {} : var.tags
-}
-
 resource "azurerm_app_service" "app_service" {
   name                    = var.app_service_name
   location                = var.location

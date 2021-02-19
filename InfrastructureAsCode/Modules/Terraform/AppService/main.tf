@@ -75,7 +75,7 @@ resource "azurerm_app_service" "app_service" {
   site_config {
     always_on                 = lookup(var.site_config_map, "always_on", false)
     app_command_line          = lookup(var.site_config_map, "sapp_command_line", null)
-    default_documents         = lookup(var.site_config_map, "default_documents", [])
+    default_documents         = lookup(var.site_config_map, "default_documents", null)
     dotnet_framework_version  = lookup(var.site_config_map, "dotnet_framework_version", "v4.0")
     ftps_state                = lookup(var.site_config_map, "ftps_state", null)
     http2_enabled             = lookup(var.site_config_map, "http2_enabled", false)

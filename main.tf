@@ -54,7 +54,6 @@ module "AppServicePlan" {
   app_service_environment_id   = module.AppServiceEnvironment.id
   location                     = var.resource_group_location
   resource_group_name          = var.resource_group_name
-  kind                         = var.app_service_plan_kind
   app_service_plan_sku_map     = var.app_service_plan_sku
 }
 

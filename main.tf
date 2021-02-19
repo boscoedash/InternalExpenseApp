@@ -51,6 +51,7 @@ module "AppServiceEnvironment" {
 module "AppServicePlan" {
   source                       = "./InfrastructureAsCode/Modules/Terraform/AppServicePlan"
   app_service_environment_id   = module.AppServiceEnvironment.id
+  location                     = var.var.resource_group_location
   resource_group_name          = var.resource_group_name
   kind                         = var.app_service_plan_kind
   maximum_elastic_worker_count = var.maximum_elastic_worker_count
@@ -59,6 +60,7 @@ module "AppServicePlan" {
 
 module "AppService" {
   source                  = "./InfrastructureAsCode/Modules/Terraform/AppServicePlan"
+  location                = var.var.resource_group_location
   app_service_name        = var.app_service_name
   resource_group_name     = var.resource_group_name
   app_service_plan_id     = module.AppServicePlan.id

@@ -80,7 +80,7 @@ variable "active_directory_map" {
 
 variable "storage_account_map" {
   type        = map
-  description = "Map of storage acocunt data"
+  description = "Map of storage account data"
 }
 
 variable "backup_map" {

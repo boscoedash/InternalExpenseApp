@@ -60,7 +60,7 @@ module "AppServicePlan" {
 }
 
 module "AppService" {
-  source                  = "./InfrastructureAsCode/Modules/Terraform/AppServicePlan"
+  source                  = "./InfrastructureAsCode/Modules/Terraform/AppService"
   location                = var.var.resource_group_location
   app_service_name        = var.app_service_name
   resource_group_name     = var.resource_group_name

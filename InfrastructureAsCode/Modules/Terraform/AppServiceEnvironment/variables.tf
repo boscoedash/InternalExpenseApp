@@ -13,7 +13,7 @@ variable "subnet_id" {
   description = "The kind of App Service plan to create.  i.e. Windows, Linux, FunctionAll."
 }
 
-variable "pricing_tier" {
+variable "ase_pricing_tier" {
   type        = string
   description = "The pricing tier to use for the plan."
 }

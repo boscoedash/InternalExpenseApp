@@ -33,9 +33,34 @@ module "ASESubnet" {
   subnet_address_space = var.ase_subnet_address_space
 }
 
+module "VMSubnet" {
+  source               = "./InfrastructureAsCode/Modules/Terraform/Subnet"
+  subnet_name          = var.vm_subnet_name
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = module.VirtualNetwork.virtual_network_name
+  subnet_address_space = var.vm_subnet_address_space
+}
+
 module "AppServiceEnvironment" {
   source                       = "./InfrastructureAsCode/Modules/Terraform/AppServiceEnvironment"
   app_service_environment_name = var.app_service_environment_name
   resource_group_name          = var.resource_group_name
   subnet_id                    = module.ASESubnet.subnet_id
+}
+
+module "AppServicePlan" {
+  source                       = "./InfrastructureAsCode/Modules/Terraform/AppServicePlan"
+  app_service_environment_id   = module.AppServiceEnvironment.id
+  resource_group_name          = var.resource_group_name
+  kind                         = var.app_service_plan_kind
+  maximum_elastic_worker_count = var.maximum_elastic_worker_count
+  sku                          = var.app_service_plan_sku
+}
+
+module "AppService" {
+  source                  = "./InfrastructureAsCode/Modules/Terraform/AppServicePlan"
+  app_service_name        = var.app_service_name
+  resource_group_name     = var.resource_group_name
+  app_service_plan_id     = module.AppServicePlan.id
+  site_config             = var.app_service_site_config
 }

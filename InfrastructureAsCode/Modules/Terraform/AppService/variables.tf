@@ -1,11 +1,11 @@
-variable "description" {
+variable "app_service_name" {
   type        = string
-  description = "The description of the resource for naming."
+  description = "The name of the app service"
 }
 
-variable "counter" {
-  type    = number
-  default = 1
+variable "location" {
+  type        = string
+  description = "The location of the app service"
 }
 
 variable "resource_group_name" {

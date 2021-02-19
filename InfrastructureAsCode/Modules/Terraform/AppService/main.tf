@@ -1,11 +1,3 @@
-module "naming" {
-  source      = "../../../naming/standard-name"
-  counter     = var.counter
-  description = var.description
-  location    = local.location
-  type        = "as"
-}
-
 locals {
 
   logs_map                        = var.logs_map == null ? {} : var.logs_map
@@ -22,8 +14,8 @@ locals {
 }
 
 resource "azurerm_app_service" "app_service" {
-  name                    = lower(module.naming.name)
-  location                = local.location
+  name                    = var.app_service_name
+  location                = var.location
   resource_group_name     = var.resource_group_name
   app_service_plan_id     = var.app_service_plan_id
   app_settings            = local.app_settings_map

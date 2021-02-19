@@ -22,7 +22,37 @@ variable "ase_subnet_address_space" {
   default     = "10.0.1.0/24"
   description = "subnet Address Space."
 }
+variable "vm_subnet_name" {
+  default     = "vm-subnet"
+  description = "Name of the ASE subnet."
+}
+variable "vm_subnet_address_space" {
+  default     = "10.0.2.0/24"
+  description = "subnet Address Space."
+}
 variable "app_service_environment_name" {
   default     = "ase-internal-01"
   description = "Name of the ASE."
+}
+variable "app_service_plan_name" {
+  default     = "asp-isolated-01"
+  description = "Name of the ASP."
+}
+variable "app_service_plan_sku_map" {
+  default     = {
+    tier     = "Isolated"
+    size     = "small"
+  }
+  description = "ASP SKU."
+}
+variable "app_service_name" {
+  default     = "expenseweb"
+  description = "Name of the ASP."
+}
+variable "app_service_site_config" {
+  default     = {
+    scm_type                 = "GitHub"
+    dotnet_framework_version = "v4.0"
+  }
+  description = "ASP SKU."
 }

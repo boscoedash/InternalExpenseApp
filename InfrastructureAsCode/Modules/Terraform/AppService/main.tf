@@ -73,27 +73,8 @@ resource "azurerm_app_service" "app_service" {
   }
 
   site_config {
-    always_on                 = lookup(var.site_config_map, "always_on", false)
-    app_command_line          = lookup(var.site_config_map, "sapp_command_line", null)
     default_documents         = lookup(var.site_config_map, "default_documents", null)
-    dotnet_framework_version  = lookup(var.site_config_map, "dotnet_framework_version", "v4.0")
-    ftps_state                = lookup(var.site_config_map, "ftps_state", null)
-    http2_enabled             = lookup(var.site_config_map, "http2_enabled", false)
-    java_version              = lookup(var.site_config_map, "java_version", null)
-    java_container            = lookup(var.site_config_map, "java_container", null)
-    java_container_version    = lookup(var.site_config_map, "java_container_version", null)
-    local_mysql_enabled       = lookup(var.site_config_map, "local_mysql_enabled", null)
-    linux_fx_version          = lookup(var.site_config_map, "linux_fx_version", null)
-    windows_fx_version        = lookup(var.site_config_map, "windows_fx_version", null)
-    managed_pipeline_mode     = lookup(var.site_config_map, "managed_pipeline_version", null)
-    min_tls_version           = lookup(var.site_config_map, "min_tls_version ", null)
-    php_version               = lookup(var.site_config_map, "php_version", null)
-    python_version            = lookup(var.site_config_map, "python_version", null)
-    remote_debugging_version  = lookup(var.site_config_map, "remote_debugging_version", null)
     scm_type                  = lookup(var.site_config_map, "scm_type", "LocalGit")
-    use_32_bit_worker_process = lookup(var.site_config_map, "use_32_bit_worker_process", null)
-    websockets_enabled        = lookup(var.site_config_map, "websockets_enabled", null)
-
     dynamic "ip_restriction" {
       for_each = local.ip_restriction_map
 

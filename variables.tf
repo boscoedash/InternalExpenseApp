@@ -51,26 +51,8 @@ variable "app_service_name" {
 }
 variable "app_service_site_config" {
   default     = {
-    always_on                 = false
-    app_command_line          = ""
     default_documents         = [""]
-    dotnet_framework_version  = "v4.0"
-    ftps_state                = ""
-    http2_enabled             = false
-    java_version              = ""
-    java_container            = ""
-    java_container_version    = ""
-    local_mysql_enabled       = false
-    linux_fx_version          = ""
-    windows_fx_version        = ""
-    managed_pipeline_mode     = ""
-    min_tls_version           = ""
-    php_version               = ""
-    python_version            = ""
-    remote_debugging_version  = ""
     scm_type                  = "GitHub"
-    use_32_bit_worker_process = false
-    websockets_enabled        = false
   }
   description = "ASP SKU."
 }

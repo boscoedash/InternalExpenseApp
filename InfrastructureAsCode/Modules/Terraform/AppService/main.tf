@@ -26,69 +26,69 @@ resource "azurerm_app_service" "app_service" {
   tags                    = local.tags
 
   auth_settings {
-    enabled                        = lookup(local.auth_settings_map, "enabled")
-    additional_login_params        = lookup(local.auth_settings_map, "additional_login_params")
-    allowed_external_redirect_urls = lookup(local.auth_settings_map, "allowed_external_redirect_urls")
-    default_provider               = lookup(local.auth_settings_map, "default_provider")
-    runtime_version                = lookup(local.auth_settings_map, "runtime_version")
-    token_refresh_extension_hours  = lookup(local.auth_settings_map, "token_refresh_extension_hours")
-    token_store_enabled            = lookup(local.auth_settings_map, "token_store_enabled")
-    unauthenticated_client_action  = lookup(local.auth_settings_map, "unauthenticated_client_action")
-    issuer                         = lookup(local.auth_settings_map, "issuer")
+    enabled                        = lookup(local.auth_settings_map, "enabled", null)
+    additional_login_params        = lookup(local.auth_settings_map, "additional_login_params", null)
+    allowed_external_redirect_urls = lookup(local.auth_settings_map, "allowed_external_redirect_urls", null)
+    default_provider               = lookup(local.auth_settings_map, "default_provider", null)
+    runtime_version                = lookup(local.auth_settings_map, "runtime_version", null)
+    token_refresh_extension_hours  = lookup(local.auth_settings_map, "token_refresh_extension_hours", null)
+    token_store_enabled            = lookup(local.auth_settings_map, "token_store_enabled", null)
+    unauthenticated_client_action  = lookup(local.auth_settings_map, "unauthenticated_client_action", null)
+    issuer                         = lookup(local.auth_settings_map, "issuer", null)
 
     active_directory {
-      client_id         = lookup(local.active_directory_map, "client_id")
-      client_secret     = lookup(local.active_directory_map, "client_secret")
-      allowed_audiences = lookup(local.active_directory_map, "client_id")
+      client_id         = lookup(local.active_directory_map, "client_id", null)
+      client_secret     = lookup(local.active_directory_map, "client_secret", null)
+      allowed_audiences = lookup(local.active_directory_map, "client_id", null)
     }
   }
 
   storage_account {
-    name         = lookup(local.storage_account_map, "name")
-    type         = lookup(local.storage_account_map, "type")
-    account_name = lookup(local.storage_account_map, "account_name")
-    share_name   = lookup(local.storage_account_map, "share_name")
-    access_key   = lookup(local.storage_account_map, "access_key")
+    name         = lookup(local.storage_account_map, "name", null)
+    type         = lookup(local.storage_account_map, "type", null)
+    account_name = lookup(local.storage_account_map, "account_name", null)
+    share_name   = lookup(local.storage_account_map, "share_name", null)
+    access_key   = lookup(local.storage_account_map, "access_key", null)
     mount_path   = lookup(local.storage_account_map, "mount_path", null)
   }
 
   backup {
-    name                = lookup(local.backup_map, "name")
-    enabled             = lookup(local.backup_map, "enabled")
+    name                = lookup(local.backup_map, "name", null)
+    enabled             = lookup(local.backup_map, "enabled", null)
     storage_account_url = lookup(local.backup_map, "storage_account_url", null) 
 
     schedule {
-      frequency_interval       = lookup(local.schedule_map.value, "frequency_interval")
-      frequency_unit           = lookup(local.schedule_map.value, "frequency_unit")
-      keep_at_least_one_backup = lookup(local.schedule_map.value, "keep_at_least_one_backup")
-      retention_period_in_days = lookup(local.schedule_map.value, "retention_period_in_days")
-      start_time               = lookup(local.schedule_map.value, "start_time")
+      frequency_interval       = lookup(local.schedule_map.value, "frequency_interval", null)
+      frequency_unit           = lookup(local.schedule_map.value, "frequency_unit", null)
+      keep_at_least_one_backup = lookup(local.schedule_map.value, "keep_at_least_one_backup", null)
+      retention_period_in_days = lookup(local.schedule_map.value, "retention_period_in_days", null)
+      start_time               = lookup(local.schedule_map.value, "start_time", null)
     }
   }
 
   connection_string {
-    name  = lookup(local.connection_string_map, "name")
-    type  = lookup(local.connection_string_map, "type")
-    value = lookup(local.connection_string_map, "value")
+    name  = lookup(local.connection_string_map, "name", null)
+    type  = lookup(local.connection_string_map, "type", null)
+    value = lookup(local.connection_string_map, "value", null)
   }
 
   logs {
     application_logs {
       azure_blob_storage {
         level             = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "level", "Off")
-        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "sas_url")
+        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "sas_url", null)
         retention_in_days = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "retention_in_days", 30)
       }
     }
 
     http_logs {
       azure_blob_storage {
-        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "sas_url")
+        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "sas_url", null)
         retention_in_days = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "retention_in_days", 30)
       }
 
       file_system {
-        retention_in_mb   = lookup(local.logs_map.value.http_logs_map.value.file_system.value, "retention_in_mb")
+        retention_in_mb   = lookup(local.logs_map.value.http_logs_map.value.file_system.value, "retention_in_mb", null)
         retention_in_days = lookup(local.logs_map.value.http_logs_map.value.file_system.value, "retention_in_days", 30)
       }
     }
@@ -96,43 +96,43 @@ resource "azurerm_app_service" "app_service" {
 
   site_config {
     always_on                 = lookup(var.site_config_map.value, "always_on", false)
-    app_command_line          = lookup(var.site_config_map.value, "sapp_command_line")
-    default_documents         = lookup(var.site_config_map.value, "default_documents")
+    app_command_line          = lookup(var.site_config_map.value, "sapp_command_line", null)
+    default_documents         = lookup(var.site_config_map.value, "default_documents", null)
     dotnet_framework_version  = lookup(var.site_config_map.value, "dotnet_framework_version", "v4.0")
-    ftps_state                = lookup(var.site_config_map.value, "ftps_state")
+    ftps_state                = lookup(var.site_config_map.value, "ftps_state", null)
     http2_enabled             = lookup(var.site_config_map.value, "http2_enabled", false)
-    java_version              = lookup(var.site_config_map.value, "java_version")
-    java_container            = lookup(var.site_config_map.value, "java_container")
-    java_container_version    = lookup(var.site_config_map.value, "java_container_version")
-    local_mysql_enabled       = lookup(var.site_config_map.value, "local_mysql_enabled")
-    linux_fx_version          = lookup(var.site_config_map.value, "linux_fx_version")
-    windows_fx_version        = lookup(var.site_config_map.value, "windows_fx_version")
-    managed_pipeline_mode     = lookup(var.site_config_map.value, "managed_pipeline_version")
-    min_tls_version           = lookup(var.site_config_map.value, "min_tls_version ")
-    php_version               = lookup(var.site_config_map.value, "php_version")
-    python_version            = lookup(var.site_config_map.value, "python_version")
-    remote_debugging_version  = lookup(var.site_config_map.value, "remote_debugging_version")
-    scm_type                  = lookup(var.site_config_map.value, "scm_type")
-    use_32_bit_worker_process = lookup(var.site_config_map.value, "use_32_bit_worker_process")
-    websockets_enabled        = lookup(var.site_config_map.value, "websockets_enabled")
+    java_version              = lookup(var.site_config_map.value, "java_version", null)
+    java_container            = lookup(var.site_config_map.value, "java_container", null)
+    java_container_version    = lookup(var.site_config_map.value, "java_container_version", null)
+    local_mysql_enabled       = lookup(var.site_config_map.value, "local_mysql_enabled", null)
+    linux_fx_version          = lookup(var.site_config_map.value, "linux_fx_version", null)
+    windows_fx_version        = lookup(var.site_config_map.value, "windows_fx_version", null)
+    managed_pipeline_mode     = lookup(var.site_config_map.value, "managed_pipeline_version", null)
+    min_tls_version           = lookup(var.site_config_map.value, "min_tls_version ", null)
+    php_version               = lookup(var.site_config_map.value, "php_version", null)
+    python_version            = lookup(var.site_config_map.value, "python_version", null)
+    remote_debugging_version  = lookup(var.site_config_map.value, "remote_debugging_version", null)
+    scm_type                  = lookup(var.site_config_map.value, "scm_type", null)
+    use_32_bit_worker_process = lookup(var.site_config_map.value, "use_32_bit_worker_process", null)
+    websockets_enabled        = lookup(var.site_config_map.value, "websockets_enabled", null)
 
     dynamic "ip_restriction" {
       for_each = local.ip_restriction_map
 
       content {
-        ip_address                = lookup(ip_restriction.value, "ip_address")
-        virtual_network_subnet_id = lookup(ip_restriction.value, "virtual_network_subnet_id")
+        ip_address                = lookup(ip_restriction.value, "ip_address", null)
+        virtual_network_subnet_id = lookup(ip_restriction.value, "virtual_network_subnet_id", null)
       }
     }
 
     cors {
       allowed_origins     = lookup(local.site_config_cors_map.value, "allowed_origins", "*")
-      support_credentials = lookup(local.site_config_cors_map.value, "support_credentials")
+      support_credentials = lookup(local.site_config_cors_map.value, "support_credentials", null)
     }
   }
 
   identity {
-    type         = lookup(local.identity_map.value, "type")
+    type         = lookup(local.identity_map.value, "type", null)
     identity_ids = lookup(local.identity_map.value, "identity_ids", [])
   }
 }

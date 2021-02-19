@@ -51,26 +51,26 @@ variable "app_service_name" {
 }
 variable "app_service_site_config" {
   default     = {
-    always_on                 = null
-    app_command_line          = null
-    default_documents         = null
-    dotnet_framework_version = "v4.0"
-    ftps_state                = null
-    http2_enabled             = null
-    java_version              = null
-    java_container            = null
-    java_container_version    = null
-    local_mysql_enabled       = null
-    linux_fx_version          = null
-    windows_fx_version        = null
-    managed_pipeline_mode     = null
-    min_tls_version           = null
-    php_version               = null
-    python_version            = null
-    remote_debugging_version  = null
+    always_on                 = ""
+    app_command_line          = ""
+    default_documents         = ""
+    dotnet_framework_version  = "v4.0"
+    ftps_state                = ""
+    http2_enabled             = ""
+    java_version              = ""
+    java_container            = ""
+    java_container_version    = ""
+    local_mysql_enabled       = ""
+    linux_fx_version          = ""
+    windows_fx_version        = ""
+    managed_pipeline_mode     = ""
+    min_tls_version           = ""
+    php_version               = ""
+    python_version            = ""
+    remote_debugging_version  = ""
     scm_type                  = "GitHub"
-    use_32_bit_worker_process = null
-    websockets_enabled        = null
+    use_32_bit_worker_process = ""
+    websockets_enabled        = ""
   }
   description = "ASP SKU."
 }

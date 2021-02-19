@@ -16,19 +16,23 @@ variable "subnet_id" {
 variable "ase_pricing_tier" {
   type        = string
   description = "The pricing tier to use for the plan."
+  default     = "I1"
 }
 
 variable "front_end_scale_factor" {
   type        = number
   description = "The ASE scale factor."
+  default     = 15
 }
 
 variable "internal_load_balancing_mode" {
   type        = string
   description = "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment. Possible values are None, Web, Publishing and combined value Web, Publishing. Defaults to None."
+  default     = "None"
 }
 
 variable "allowed_user_ip_cidrs" {
-  type        = number
-  description = "Pricing tier for the front end instances. Possible values are I1, I2 and I3. Defaults to I1."
+  type        = list
+  description = "Allowed user added IP ranges on the ASE database. Use the addresses you want to set as the explicit egress address ranges"
+  default     = []
 }

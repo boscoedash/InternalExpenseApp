@@ -49,10 +49,4 @@ variable "app_service_name" {
   default     = "expenseweb"
   description = "Name of the ASP."
 }
-variable "app_service_site_config" {
-  default     = {
-    default_documents         = [""]
-    scm_type                  = "GitHub"
-  }
-  description = "ASP SKU."
-}
+

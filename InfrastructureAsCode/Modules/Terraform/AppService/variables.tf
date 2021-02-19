@@ -54,12 +54,6 @@ variable "logs_map" {
   default     = {} 
 }
 
-variable "site_config_map" {
-  type        = map
-  description = "Map of site config data"
-  default     = {}
-}
-
 variable "site_config_cors_map" {
   type        = map
   description = "Map of cors data"

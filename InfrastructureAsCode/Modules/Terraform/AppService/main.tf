@@ -72,24 +72,6 @@ resource "azurerm_app_service" "app_service" {
     value = lookup(local.connection_string_map, "value", null)
   }
 
-  site_config {
-    default_documents         = lookup(var.site_config_map, "default_documents", null)
-    scm_type                  = lookup(var.site_config_map, "scm_type", "LocalGit")
-    dynamic "ip_restriction" {
-      for_each = local.ip_restriction_map
-
-      content {
-        ip_address                = lookup(ip_restriction, "ip_address", null)
-        virtual_network_subnet_id = lookup(ip_restriction, "virtual_network_subnet_id", null)
-      }
-    }
-
-    cors {
-      allowed_origins     = lookup(local.site_config_cors_map, "allowed_origins", ["*"])
-      support_credentials = lookup(local.site_config_cors_map, "support_credentials", null)
-    }
-  }
-
   identity {
     type         = lookup(local.identity_map, "type", null)
     identity_ids = lookup(local.identity_map, "identity_ids", [])

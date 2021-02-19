@@ -63,5 +63,4 @@ module "AppService" {
   app_service_name        = var.app_service_name
   resource_group_name     = var.resource_group_name
   app_service_plan_id     = module.AppServicePlan.id
-  site_config_map         = var.app_service_site_config
 }

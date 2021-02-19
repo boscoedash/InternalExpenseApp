@@ -75,21 +75,21 @@ resource "azurerm_app_service" "app_service" {
   logs {
     application_logs {
       azure_blob_storage {
-        level             = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage, "level", "Off")
-        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage, "sas_url", null)
-        retention_in_days = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage, "retention_in_days", 30)
+        level             = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "level", "Off")
+        sas_url           = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "sas_url", null)
+        retention_in_days = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "retention_in_days", 30)
       }
     }
 
     http_logs {
       azure_blob_storage {
-        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage, "sas_url", null)
-        retention_in_days = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage, "retention_in_days", 30)
+        sas_url           = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "sas_url", null)
+        retention_in_days = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "retention_in_days", 30)
       }
 
       file_system {
-        retention_in_mb   = lookup(local.logs_map.value.http_logs_map.value.file_system, "retention_in_mb", null)
-        retention_in_days = lookup(local.logs_map.value.http_logs_map.value.file_system, "retention_in_days", 30)
+        retention_in_mb   = lookup(local.logs_map["http_logs_map"]["file_system"], "retention_in_mb", null)
+        retention_in_days = lookup(local.logs_map["http_logs_map"]["file_system"], "retention_in_days", 30)
       }
     }
   }

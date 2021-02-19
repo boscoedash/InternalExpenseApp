@@ -16,7 +16,7 @@ variable "resource_group_name" {
 variable "tags" {
   type        = map
   description = "A key-value pair of tags."
-  default     = null
+  default     = {}
 }
 
 variable "app_service_plan_id" {
@@ -51,71 +51,71 @@ variable "https_only" {
 variable "logs_map" {
   type        = map
   description = "Map of log data"
-  default     = null 
+  default     = {} 
 }
 
 variable "site_config_map" {
   type        = map
   description = "Map of site config data"
-  default     = null
+  default     = {}
 }
 
 variable "site_config_cors_map" {
   type        = map
   description = "Map of cors data"
-  default     = null
+  default     = {}
 }
 
 variable "identity_map" {
   type        = map
   description = "Map of identity data"
-  default     = null
+  default     = {}
 }
 
 variable "app_settings_map" {
   type        = map
   description = "Map of app settings"
-  default     = null
+  default     = {}
 }
 
 variable "auth_settings_map" {
   type        = map
   description = "Map of authentication settings data"
-  default     = null
+  default     = {}
 }
 
 variable "active_directory_map" {
   type        = map
   description = "Map of active directory data"
-  default     = null
+  default     = {}
 }
 
 variable "storage_account_map" {
   type        = map
   description = "Map of storage account data"
-  default     = null
+  default     = {}
 }
 
 variable "backup_map" {
   type        = map
   description = "Map of backup data"
-  default     = null
+  default     = {}
 }
 
 variable "schedule_map" {
   type        = map
   description = "Map of backup schedule data"
-  default     = null
+  default     = {}
 }
 
 variable "connection_string_map" {
   type        = map
   description = "Map of connection string data"
-  default     = null
+  default     = {}
 }
 
 variable "ip_restriction_map" {
   type        = map
   description = "Map of ip restriction data"
-  default     = null
+  default     = {}
 }

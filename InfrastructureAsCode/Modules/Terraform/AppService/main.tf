@@ -34,7 +34,7 @@ resource "azurerm_app_service" "app_service" {
     token_refresh_extension_hours  = lookup(local.auth_settings_map, "token_refresh_extension_hours")
     token_store_enabled            = lookup(local.auth_settings_map, "token_store_enabled")
     unauthenticated_client_action  = lookup(local.auth_settings_map, "unauthenticated_client_action")
-    issuer                         = lookup(local.auth_settings_map, "isuer")
+    issuer                         = lookup(local.auth_settings_map, "issuer")
 
     active_directory {
       client_id         = lookup(local.active_directory_map, "client_id")

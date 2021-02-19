@@ -28,7 +28,7 @@ variable "front_end_scale_factor" {
 variable "internal_load_balancing_mode" {
   type        = string
   description = "Specifies which endpoints to serve internally in the Virtual Network for the App Service Environment. Possible values are None, Web, Publishing and combined value Web, Publishing. Defaults to None."
-  default     = "None"
+  default     = "Web, Publishing"
 }
 
 variable "allowed_user_ip_cidrs" {

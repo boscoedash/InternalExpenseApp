@@ -58,11 +58,11 @@ resource "azurerm_app_service" "app_service" {
     storage_account_url = lookup(local.backup_map, "storage_account_url", null) 
 
     schedule {
-      frequency_interval       = lookup(local.schedule_map.value, "frequency_interval", null)
-      frequency_unit           = lookup(local.schedule_map.value, "frequency_unit", null)
-      keep_at_least_one_backup = lookup(local.schedule_map.value, "keep_at_least_one_backup", null)
-      retention_period_in_days = lookup(local.schedule_map.value, "retention_period_in_days", null)
-      start_time               = lookup(local.schedule_map.value, "start_time", null)
+      frequency_interval       = lookup(local.schedule_map, "frequency_interval", null)
+      frequency_unit           = lookup(local.schedule_map, "frequency_unit", null)
+      keep_at_least_one_backup = lookup(local.schedule_map, "keep_at_least_one_backup", null)
+      retention_period_in_days = lookup(local.schedule_map, "retention_period_in_days", null)
+      start_time               = lookup(local.schedule_map, "start_time", null)
     }
   }
 
@@ -75,64 +75,64 @@ resource "azurerm_app_service" "app_service" {
   logs {
     application_logs {
       azure_blob_storage {
-        level             = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "level", "Off")
-        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "sas_url", null)
-        retention_in_days = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "retention_in_days", 30)
+        level             = lookup(local.logs_map.application_logs_map.azure_blob_storage, "level", "Off")
+        sas_url           = lookup(local.logs_map.application_logs_map.azure_blob_storage, "sas_url", null)
+        retention_in_days = lookup(local.logs_map.application_logs_map.azure_blob_storage, "retention_in_days", 30)
       }
     }
 
     http_logs {
       azure_blob_storage {
-        sas_url           = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "sas_url", null)
-        retention_in_days = lookup(local.logs_map.value.application_logs_map.value.azure_blob_storage.value, "retention_in_days", 30)
+        sas_url           = lookup(local.logs_map.application_logs_map.azure_blob_storage, "sas_url", null)
+        retention_in_days = lookup(local.logs_map.application_logs_map.azure_blob_storage, "retention_in_days", 30)
       }
 
       file_system {
-        retention_in_mb   = lookup(local.logs_map.value.http_logs_map.value.file_system.value, "retention_in_mb", null)
-        retention_in_days = lookup(local.logs_map.value.http_logs_map.value.file_system.value, "retention_in_days", 30)
+        retention_in_mb   = lookup(local.logs_map.http_logs_map.file_system, "retention_in_mb", null)
+        retention_in_days = lookup(local.logs_map.http_logs_map.file_system, "retention_in_days", 30)
       }
     }
   }
 
   site_config {
-    always_on                 = lookup(var.site_config_map.value, "always_on", false)
-    app_command_line          = lookup(var.site_config_map.value, "sapp_command_line", null)
-    default_documents         = lookup(var.site_config_map.value, "default_documents", null)
-    dotnet_framework_version  = lookup(var.site_config_map.value, "dotnet_framework_version", "v4.0")
-    ftps_state                = lookup(var.site_config_map.value, "ftps_state", null)
-    http2_enabled             = lookup(var.site_config_map.value, "http2_enabled", false)
-    java_version              = lookup(var.site_config_map.value, "java_version", null)
-    java_container            = lookup(var.site_config_map.value, "java_container", null)
-    java_container_version    = lookup(var.site_config_map.value, "java_container_version", null)
-    local_mysql_enabled       = lookup(var.site_config_map.value, "local_mysql_enabled", null)
-    linux_fx_version          = lookup(var.site_config_map.value, "linux_fx_version", null)
-    windows_fx_version        = lookup(var.site_config_map.value, "windows_fx_version", null)
-    managed_pipeline_mode     = lookup(var.site_config_map.value, "managed_pipeline_version", null)
-    min_tls_version           = lookup(var.site_config_map.value, "min_tls_version ", null)
-    php_version               = lookup(var.site_config_map.value, "php_version", null)
-    python_version            = lookup(var.site_config_map.value, "python_version", null)
-    remote_debugging_version  = lookup(var.site_config_map.value, "remote_debugging_version", null)
-    scm_type                  = lookup(var.site_config_map.value, "scm_type", null)
-    use_32_bit_worker_process = lookup(var.site_config_map.value, "use_32_bit_worker_process", null)
-    websockets_enabled        = lookup(var.site_config_map.value, "websockets_enabled", null)
+    always_on                 = lookup(var.site_config_map, "always_on", false)
+    app_command_line          = lookup(var.site_config_map, "sapp_command_line", null)
+    default_documents         = lookup(var.site_config_map, "default_documents", null)
+    dotnet_framework_version  = lookup(var.site_config_map, "dotnet_framework_version", "v4.0")
+    ftps_state                = lookup(var.site_config_map, "ftps_state", null)
+    http2_enabled             = lookup(var.site_config_map, "http2_enabled", false)
+    java_version              = lookup(var.site_config_map, "java_version", null)
+    java_container            = lookup(var.site_config_map, "java_container", null)
+    java_container_version    = lookup(var.site_config_map, "java_container_version", null)
+    local_mysql_enabled       = lookup(var.site_config_map, "local_mysql_enabled", null)
+    linux_fx_version          = lookup(var.site_config_map, "linux_fx_version", null)
+    windows_fx_version        = lookup(var.site_config_map, "windows_fx_version", null)
+    managed_pipeline_mode     = lookup(var.site_config_map, "managed_pipeline_version", null)
+    min_tls_version           = lookup(var.site_config_map, "min_tls_version ", null)
+    php_version               = lookup(var.site_config_map, "php_version", null)
+    python_version            = lookup(var.site_config_map, "python_version", null)
+    remote_debugging_version  = lookup(var.site_config_map, "remote_debugging_version", null)
+    scm_type                  = lookup(var.site_config_map, "scm_type", null)
+    use_32_bit_worker_process = lookup(var.site_config_map, "use_32_bit_worker_process", null)
+    websockets_enabled        = lookup(var.site_config_map, "websockets_enabled", null)
 
     dynamic "ip_restriction" {
       for_each = local.ip_restriction_map
 
       content {
-        ip_address                = lookup(ip_restriction.value, "ip_address", null)
-        virtual_network_subnet_id = lookup(ip_restriction.value, "virtual_network_subnet_id", null)
+        ip_address                = lookup(ip_restriction, "ip_address", null)
+        virtual_network_subnet_id = lookup(ip_restriction, "virtual_network_subnet_id", null)
       }
     }
 
     cors {
-      allowed_origins     = lookup(local.site_config_cors_map.value, "allowed_origins", "*")
-      support_credentials = lookup(local.site_config_cors_map.value, "support_credentials", null)
+      allowed_origins     = lookup(local.site_config_cors_map, "allowed_origins", "*")
+      support_credentials = lookup(local.site_config_cors_map, "support_credentials", null)
     }
   }
 
   identity {
-    type         = lookup(local.identity_map.value, "type", null)
-    identity_ids = lookup(local.identity_map.value, "identity_ids", [])
+    type         = lookup(local.identity_map, "type", null)
+    identity_ids = lookup(local.identity_map, "identity_ids", [])
   }
 }

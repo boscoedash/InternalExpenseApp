@@ -1,4 +1,4 @@
-variable "name" {
+variable "app_service_environment_name" {
   type        = string
   description = "The ASE name."
 }

@@ -69,8 +69,8 @@ variable "app_service_site_config" {
     python_version            = ""
     remote_debugging_version  = ""
     scm_type                  = "GitHub"
-    use_32_bit_worker_process = ""
-    websockets_enabled        = ""
+    use_32_bit_worker_process = false
+    websockets_enabled        = false
   }
   description = "ASP SKU."
 }

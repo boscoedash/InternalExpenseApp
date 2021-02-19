@@ -55,7 +55,7 @@ module "AppServicePlan" {
   resource_group_name          = var.resource_group_name
   kind                         = var.app_service_plan_kind
   maximum_elastic_worker_count = var.maximum_elastic_worker_count
-  sku                          = var.app_service_plan_sku
+  app_service_plan_sku_map     = var.app_service_plan_sku
 }
 
 module "AppService" {

@@ -38,7 +38,7 @@ variable "app_service_plan_name" {
   default     = "asp-isolated-01"
   description = "Name of the ASP."
 }
-variable "app_service_plan_sku_map" {
+variable "app_service_plan_sku" {
   default     = {
     tier     = "Isolated"
     size     = "small"

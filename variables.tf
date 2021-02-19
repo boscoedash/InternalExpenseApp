@@ -67,7 +67,7 @@ variable "app_service_site_config" {
     min_tls_version           = null
     php_version               = null
     python_version            = null
-    remote_debugging_version  =  
+    remote_debugging_version  = null
     scm_type                  = "GitHub"
     use_32_bit_worker_process = null
     websockets_enabled        = null

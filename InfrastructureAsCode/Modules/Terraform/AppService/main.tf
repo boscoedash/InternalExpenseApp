@@ -72,32 +72,10 @@ resource "azurerm_app_service" "app_service" {
     value = lookup(local.connection_string_map, "value", null)
   }
 
-  logs {
-    application_logs {
-      azure_blob_storage {
-        level             = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "level", "Off")
-        sas_url           = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "sas_url", null)
-        retention_in_days = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "retention_in_days", 30)
-      }
-    }
-
-    http_logs {
-      azure_blob_storage {
-        sas_url           = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "sas_url", null)
-        retention_in_days = lookup(local.logs_map["application_logs_map"]["azure_blob_storage"], "retention_in_days", 30)
-      }
-
-      file_system {
-        retention_in_mb   = lookup(local.logs_map["http_logs_map"]["file_system"], "retention_in_mb", null)
-        retention_in_days = lookup(local.logs_map["http_logs_map"]["file_system"], "retention_in_days", 30)
-      }
-    }
-  }
-
   site_config {
     always_on                 = lookup(var.site_config_map, "always_on", false)
     app_command_line          = lookup(var.site_config_map, "sapp_command_line", null)
-    default_documents         = lookup(var.site_config_map, "default_documents", null)
+    default_documents         = lookup(var.site_config_map, "default_documents", [])
     dotnet_framework_version  = lookup(var.site_config_map, "dotnet_framework_version", "v4.0")
     ftps_state                = lookup(var.site_config_map, "ftps_state", null)
     http2_enabled             = lookup(var.site_config_map, "http2_enabled", false)
@@ -112,7 +90,7 @@ resource "azurerm_app_service" "app_service" {
     php_version               = lookup(var.site_config_map, "php_version", null)
     python_version            = lookup(var.site_config_map, "python_version", null)
     remote_debugging_version  = lookup(var.site_config_map, "remote_debugging_version", null)
-    scm_type                  = lookup(var.site_config_map, "scm_type", null)
+    scm_type                  = lookup(var.site_config_map, "scm_type", "LocalGit")
     use_32_bit_worker_process = lookup(var.site_config_map, "use_32_bit_worker_process", null)
     websockets_enabled        = lookup(var.site_config_map, "websockets_enabled", null)
 
@@ -126,7 +104,7 @@ resource "azurerm_app_service" "app_service" {
     }
 
     cors {
-      allowed_origins     = lookup(local.site_config_cors_map, "allowed_origins", "*")
+      allowed_origins     = lookup(local.site_config_cors_map, "allowed_origins", ["*"])
       support_credentials = lookup(local.site_config_cors_map, "support_credentials", null)
     }
   }

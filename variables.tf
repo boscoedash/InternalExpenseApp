@@ -40,7 +40,7 @@ variable "app_service_plan_name" {
 }
 variable "app_service_plan_sku" {
   default     = {
-    tier     = "Standard"
+    tier     = "isolated"
     size     = "S1"
   }
   description = "ASP SKU."

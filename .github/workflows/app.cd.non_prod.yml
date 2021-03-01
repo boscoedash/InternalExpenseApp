@@ -6,9 +6,11 @@ name: Continuous Deployment Non Production
 on:
   workflow_run:
     workflows: 
-      - ContinuousIntegrationNonProduction
+      - "Continuous Integration Non Production"
     types: 
       - completed
+
+  workflow_dispatch:
 
 jobs:
   ContinuousDeployment_Compile:

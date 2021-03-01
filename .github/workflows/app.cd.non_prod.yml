@@ -19,7 +19,9 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: "Checkout"
-          uses: actions/checkout@develop
+          uses: actions/checkout@v2
+          with: 
+            ref: 'develop'
         - name: "Compile"
           uses: ./.github/workflows/Compile
 
@@ -29,7 +31,9 @@ jobs:
       needs: ContinuousDeployment_Compile
       steps:
         - name: "Checkout"
-          uses: actions/checkout@develop
+          uses: actions/checkout@v2
+          with: 
+            ref: 'develop'
         - name: "Publish"
           uses: ./.github/workflows/Publish/non_prod
 
@@ -39,6 +43,8 @@ jobs:
       needs: ContinuousDeployment_Publish
       steps:
         - name: "Checkout"
-          uses: actions/checkout@develop
+          uses: actions/checkout@v2
+          with: 
+            ref: 'develop'
         - name: "Deploy"
           uses: ./.github/workflows/Deploy/non_prod

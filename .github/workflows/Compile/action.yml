@@ -1,0 +1,11 @@
+name: "Compile"
+description: "Place Holder for Compile Workflow"
+runs:
+  using: "composite"
+  steps: 
+  - run: |
+      echo "Installing Dependencies..."
+    shell: bash
+  - run: |
+      echo "Compiling Application..."
+    shell: bash

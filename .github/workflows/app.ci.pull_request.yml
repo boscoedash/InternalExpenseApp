@@ -1,21 +1,17 @@
 # Continuous Integration workflow
 
-name: ContinuousIntegration-Merge-NonProd
+name: ContinuousIntegration-PullRequest-NonProd
 
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
+  pull_request:
     branches: [ develop ]
     paths:
       - Source/*
       - .github/workflows/app.ci.non_prod.yml
-      - .github/workflows/app.cd.non_prod.yml
       - .github/workflows/CI/*
       - .github/workflows/Compile/*
-      - .github/workflows/Publish/*
-      - .github/workflows/Deploy/*
-
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

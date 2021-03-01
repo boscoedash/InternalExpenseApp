@@ -4,5 +4,5 @@ runs:
   using: "composite"
   steps: 
   - run: |
-      echo "running Integration Tests"
+      echo "Running Integration Tests"
     shell: bash

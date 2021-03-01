@@ -4,5 +4,5 @@ runs:
   using: "composite"
   steps: 
   - run: |
-      echo "running Unit Tests"
+      echo "Running Unit Tests"
     shell: bash

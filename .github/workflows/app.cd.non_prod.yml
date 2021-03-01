@@ -5,11 +5,10 @@ name: Continuous Deployment Non Production
 # Controls when the action will run. 
 on:
   workflow_run:
-    workflows: ["Continuous Integration Non Production"]
-    branches: [develop]
+    workflows: 
+      - "Continuous Integration Non Production"
     types: 
       - completed
-      - requested
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

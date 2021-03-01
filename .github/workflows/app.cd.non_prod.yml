@@ -39,6 +39,7 @@ jobs:
   ContinuousDeployment_Deploy:
       name: "Deploy"
       runs-on: ubuntu-latest
+      environment: "Non-Production"
       needs: ContinuousDeployment_Publish
       steps:
         - name: "Checkout"

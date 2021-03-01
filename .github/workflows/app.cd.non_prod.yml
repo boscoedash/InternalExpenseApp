@@ -37,7 +37,7 @@ jobs:
         - name: "Publish"
           uses: ./.github/workflows/Publish/non_prod
 
-    ContinuousDeployment_Deploy:
+  ContinuousDeployment_Deploy:
       name: "Deploy"
       runs-on: ubuntu-latest
       needs: ContinuousIntegration_Testing

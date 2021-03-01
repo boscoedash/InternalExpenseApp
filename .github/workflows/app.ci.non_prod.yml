@@ -11,6 +11,7 @@ on:
       - Source/*
       - .github/workflows/app.ci.yml
       - .github/workflows/CI/*
+      - .github/workflows/Compile/*
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

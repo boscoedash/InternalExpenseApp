@@ -24,7 +24,7 @@ jobs:
 
       steps:
         - name: "Checkout"
-          uses: actions/checkout@master
+          uses: actions/checkout@develop
         - name: "Lint"
           uses: ./.github/workflows/CI/linters
         - name: "UnitTests"
@@ -38,6 +38,6 @@ jobs:
       needs: ContinuousIntegration_Testing
       steps:
         - name: "Checkout"
-          uses: actions/checkout@master
+          uses: actions/checkout@develop
         - name: "Compile"
           uses: ./.github/workflows/Compile

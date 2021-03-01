@@ -6,9 +6,11 @@ name: Terraform_CD
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ master, develop ]
+    paths:
+      - main.tf
+      - variables.tf
+      - InfrastructureAsCode/Modules/Terraform/*
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

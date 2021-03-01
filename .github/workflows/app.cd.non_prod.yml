@@ -10,9 +10,6 @@ on:
     types: 
       - completed
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
   ContinuousDeployment_Compile:
       name: "Compile"

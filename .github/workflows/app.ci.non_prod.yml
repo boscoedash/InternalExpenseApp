@@ -1,6 +1,6 @@
 # Continuous Integration workflow
 
-name: ContinuousIntegrationNonProduction
+name: Continuous Integration Non Production
 
 # Controls when the action will run. 
 on:

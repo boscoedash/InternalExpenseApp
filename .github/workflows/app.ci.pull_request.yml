@@ -1,6 +1,6 @@
 # Continuous Integration workflow
 
-name: ContinuousIntegration-PullRequest-NonProd
+name: Continuous Integration PR Non Production
 
 # Controls when the action will run. 
 on:

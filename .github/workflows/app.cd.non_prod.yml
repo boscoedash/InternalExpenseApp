@@ -9,7 +9,7 @@ on:
     branches: [ develop ]
     paths:
       - Source/*
-      - .github/workflows/app.cd.yml
+      - .github/workflows/app.cd.non_prod.yml
       - .github/workflows/Compile/*
       - .github/workflows/Publish/*
       - .github/workflows/Deploy/*

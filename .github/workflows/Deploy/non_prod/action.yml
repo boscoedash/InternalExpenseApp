@@ -1,0 +1,10 @@
+name: "DeployToNonProduction"
+description: "Place Holder for Publish"
+runs:
+  using: "composite"
+  steps: 
+  - run: |
+      echo "Deploy Azure Web App"
+      echo "Example:"
+      echo "uses: Azure/webapps-deploy@v2"
+    shell: bash

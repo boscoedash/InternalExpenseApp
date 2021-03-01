@@ -1,6 +1,6 @@
 # Continuous Integration workflow
 
-name: InternalExpenseApp_ContinuousIntegration
+name: ContinuousIntegration
 
 # Controls when the action will run. 
 on:

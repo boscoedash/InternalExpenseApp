@@ -1,0 +1,7 @@
+name: "Linters"
+description: "Place Holder for Linters"
+runs:
+  using: "composite"
+  steps: 
+  - run: |
+      echo "running linters"

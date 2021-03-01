@@ -1,0 +1,26 @@
+# Continuous Integration workflow
+
+name: InternalExpenseApp_ContinuousIntegration
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ develop ]
+    paths:
+      - Source/*
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  jobs:
+
+  ContinuousDeployment:
+      name: "ContinuousDeployment"
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: "Checkout"
+          uses: actions/checkout@master
+        - name: "Lint"
+          uses: ./.github/workflows/CI/linters

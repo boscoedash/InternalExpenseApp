@@ -57,8 +57,11 @@ jobs:
           uses: actions/checkout@v2
           with: 
             ref: 'develop'
-        - name: "Publish"
-          uses: ./.github/workflows/Publish/non_prod
+      - name: dotnet build and publish
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
 
   ContinuousDeployment_Deploy:
       name: "Deploy"

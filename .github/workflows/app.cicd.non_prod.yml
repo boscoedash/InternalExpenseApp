@@ -57,7 +57,13 @@ jobs:
 #          run: |
 #            dotnet restore
 #            dotnet build --configuration Release
-#            dotnet publish -c Release -o './Source' 
+#            dotnet publish -c Release -o './Source/Contoso.Expenses.Web' 
+#      steps:
+#        - name: dotnet build and publish
+#          run: |
+#            dotnet restore
+#            dotnet build --configuration Release
+#            dotnet publish -c Release -o './Source/Contoso.Expenses.API' 
 
   ContinuousDeployment_Deploy:
       name: "Deploy"

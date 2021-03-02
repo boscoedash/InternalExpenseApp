@@ -3,12 +3,9 @@ description: "Place Holder for Compile Workflow"
 runs:
   using: "composite"
   steps: 
-  - name: Setup Dotnet 3.3.x
-    uses: actions/setup-dotnet@v1
-    with:
-      dotnet-version: '3.3.x'
-  - name: dotnet build and publish
-    run: |
-      dotnet restore
-      dotnet build --configuration Release
-      dotnet publish -c Release -o 'Source/Contoso.Expenses.Web'
+  - run: |
+      echo "Installing Dependencies..."
+    shell: bash
+  - run: |
+      echo "Compiling Application..."
+    shell: bash

@@ -1,10 +1,12 @@
 name: "DeployToNonProduction"
-description: "Place Holder for Publish"
+description: "Publish Web App"
 runs:
   using: "composite"
   steps: 
-  - run: |
-      echo "Deploy Azure Web App"
-      echo "Example:"
-      echo "uses: Azure/webapps-deploy@v2"
-    shell: bash
+    # Deploy to Azure Web apps
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: "expenseweb" # Replace with your app name
+        publish-profile: ${{ secrets.INTERNAL_EXPENSE_APP_PUBLISH_PROFILE_WEB  }} # Define secret variable in repository settings as per action documentation
+        package: 'Source/Contoso.Expenses.Web'

@@ -70,5 +70,9 @@ jobs:
           uses: actions/checkout@v2
           with: 
             ref: 'develop'
-        - name: "Deploy"
-          uses: ./.github/workflows/Deploy/non_prod
+        - name: "DeployToNonProduction"
+          uses: azure/webapps-deploy@v2
+          with: 
+            app-name: "expenseweb" # Replace with your app name
+            publish-profile: ${{ secrets.INTERNAL_EXPENSE_APP_PUBLISH_PROFILE_WEB }} # Define secret variable in repository settings as per action documentation
+            package: 'Source/Contoso.Expenses.Web'

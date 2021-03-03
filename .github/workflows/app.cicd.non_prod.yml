@@ -75,13 +75,19 @@ jobs:
       #      dotnet restore
       #      dotnet build --configuration Release
       #      dotnet publish -c Release -o './Source/Relecloud.Web' 
-       - name: "Checkout"
-         uses: actions/checkout@v2
-         with: 
-           ref: 'develop'
-       - name: "DeployWebToNonProduction"
+      - name: "Checkout"
+        uses: actions/checkout@v2
+        with: 
+          ref: 'develop'
+      - name: "DeployWebToNonProduction"
+        uses: azure/webapps-deploy@v2
+        with: 
+          app-name: "expenseweb" # Replace with your app name
+          publish-profile: ${{ secrets.INTERNAL_EXPENSE_APP_PUBLISH_PROFILE_WEB }} # Define secret variable in repository settings as per action documentation
+          package: './Source/Contoso.Expenses.Web'
+      - name: "DeployWebToNonProduction"
          uses: azure/webapps-deploy@v2
          with: 
            app-name: "expenseweb" # Replace with your app name
-           publish-profile: ${{ secrets.INTERNAL_EXPENSE_APP_PUBLISH_PROFILE_WEB }} # Define secret variable in repository settings as per action documentation
-           package: './Source/Relecloud.Web'
+           publish-profile: ${{ secrets.INTERNAL_EXPENSE_APP_PUBLISH_PROFILE_API }} # Define secret variable in repository settings as per action documentation
+           package: './Source/Contoso.Expenses.API'

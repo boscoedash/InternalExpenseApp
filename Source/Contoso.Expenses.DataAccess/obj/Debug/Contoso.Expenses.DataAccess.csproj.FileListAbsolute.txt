@@ -1,0 +1,12 @@
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\bin\Debug\Contoso.Expenses.DataAccess.dll.config
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\bin\Debug\Contoso.Expenses.DataAccess.dll
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\bin\Debug\Contoso.Expenses.DataAccess.pdb
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\bin\Debug\EntityFramework.dll
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\bin\Debug\EntityFramework.xml
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\obj\Debug\Contoso.Expenses.DataAccess.csprojAssemblyReference.cache
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\obj\Debug\Contoso.Expenses.DataAccess.csproj.CoreCompileInputs.cache
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\obj\Debug\Contoso.Expenses.DataAccess.csproj.CopyComplete
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\obj\Debug\Contoso.Expenses.DataAccess.dll
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.DataAccess\obj\Debug\Contoso.Expenses.DataAccess.pdb

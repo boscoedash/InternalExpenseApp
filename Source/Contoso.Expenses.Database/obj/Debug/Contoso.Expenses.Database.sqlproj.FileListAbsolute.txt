@@ -1,0 +1,9 @@
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\bin\Debug\Contoso.Expenses.Database.dacpac
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\bin\Debug\Contoso.Expenses.Database.dll
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\bin\Debug\Contoso.Expenses.Database.pdb
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\obj\Debug\Model.xml
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\obj\Debug\refactor.xml
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\obj\Debug\postdeploy.sql
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\obj\Debug\predeploy.sql
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\obj\Debug\Contoso.Expenses.Database.dll
+C:\Repositories\InternalExpenseApp\Source\Contoso.Expenses.Database\obj\Debug\Contoso.Expenses.Database.pdb

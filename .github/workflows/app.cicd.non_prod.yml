@@ -52,7 +52,7 @@ jobs:
       name: "Deploy"
       runs-on: ubuntu-latest
       environment: "Non-Production"
-      needs: ContinuousDeployment_Publish
+      needs: ContinuousIntegration_Compile
       steps:
         - name: "Checkout"
           uses: actions/checkout@v2

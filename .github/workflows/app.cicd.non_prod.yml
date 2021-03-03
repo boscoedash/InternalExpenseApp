@@ -9,13 +9,11 @@ on:
     branches: [ develop ]
     paths:
       - Source/*
-      - .github/workflows/app.ci.non_prod.yml
-      - .github/workflows/app.cd.non_prod.yml
+      - .github/workflows/app.cicd.non_prod.yml
       - .github/workflows/CI/*
       - .github/workflows/Compile/*
-      - .github/workflows/Publish/*
-      - .github/workflows/Deploy/*
-
+      - .github/workflows/Publish/non_prod/*
+      - .github/workflows/Deploy/non_prod/*
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -50,9 +48,10 @@ jobs:
         - name: "Compile"
           uses: ./.github/workflows/Compile
 
-  ContinuousDeployment_Publish:
-      name: "Publish"
+  ContinuousDeployment_Deploy:
+      name: "Deploy"
       runs-on: ubuntu-latest
+      environment: "Non-Production"
       needs: ContinuousIntegration_Compile
       steps:
         - name: "Checkout"
@@ -61,16 +60,28 @@ jobs:
             ref: 'develop'
         - name: "Publish"
           uses: ./.github/workflows/Publish/non_prod
-
-  ContinuousDeployment_Deploy:
-      name: "Deploy"
-      runs-on: ubuntu-latest
-      environment: "Non-Production"
-      needs: ContinuousDeployment_Publish
-      steps:
-        - name: "Checkout"
-          uses: actions/checkout@v2
-          with: 
-            ref: 'develop'
         - name: "Deploy"
           uses: ./.github/workflows/Deploy/non_prod
+
+#
+#  ContinuousDeployment_Deploy:
+#      name: "Deploy"
+#      runs-on: ubuntu-latest
+#      environment: "Non-Production"
+#      needs: ContinuousDeployment_Publish
+#      steps:
+#        - name: Build and Publish
+#          run: |
+#            dotnet restore
+#            dotnet build --configuration Release
+#            dotnet publish -c Release -o './Source/Relecloud.Web' 
+#        - name: "Checkout"
+#          uses: actions/checkout@v2
+#          with: 
+#            ref: 'develop'
+#        - name: "DeployWebToNonProduction"
+#          uses: azure/webapps-deploy@v2
+#          with: 
+#            app-name: "expenseweb" # Replace with your app name
+#            publish-profile: ${{ secrets.INTERNAL_EXPENSE_APP_PUBLISH_PROFILE_WEB }} # Define secret variable in repository settings as per action documentation
+#            package: './Source/Relecloud.Web'

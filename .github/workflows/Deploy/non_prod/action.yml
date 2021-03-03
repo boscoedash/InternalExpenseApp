@@ -1,4 +1,12 @@
-name: "DeployToNonProduction"
+# steps:
+#  name: "DeployToNonProduction"
+#  uses: azure/webapps-deploy@v2
+#  with: 
+#    app-name: "expenseweb" # Replace with your app name
+#    publish-profile: ${{ secrets.INTERNAL_EXPENSE_APP_PUBLISH_PROFILE_WEB }} # Define secret variable in repository settings as per action documentation
+#    package: 'Source/Contoso.Expenses.Web'
+
+name: "DeployToProduction"
 description: "Place Holder for Publish"
 runs:
   using: "composite"

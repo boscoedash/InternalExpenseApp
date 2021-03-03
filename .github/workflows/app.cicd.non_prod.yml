@@ -68,7 +68,7 @@ jobs:
      name: "Deploy"
      runs-on: ubuntu-latest
      environment: "Non-Production"
-     needs: ContinuousDeployment_Publish
+    #  needs: ContinuousDeployment_Publish
      steps:
       #  - name: Build and Publish
       #    run: |

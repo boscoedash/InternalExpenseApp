@@ -35,7 +35,7 @@ jobs:
     - name: "SeleniumTests"
       uses: ./.github/workflows/CI/Selenium
       with:
-        SeleniumRoot: '$GITHUB_WORKSPACE/Selenium'
+        SeleniumRoot: "$GITHUB_WORKSPACE/Selenium"
 
 # ContinuousIntegration_Compile:
 #     name: "Compile"

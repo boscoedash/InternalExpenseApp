@@ -5,12 +5,5 @@ runs:
   steps: 
   - name: Install dependencies
     run: |
-      $path = $PSScriptRoot
-      while ((Split-Path -Path $path -Leaf) -ne '.github')
-      {
-          $path = Split-Path -Path $path -Parent
-      }
-      $root = Split-Path -Path $path -Parent
-      write-host $path
-      .\Selenium\Install-ChromeDriver.ps1
+      .\$GITHUB_WORKSPACE\Selenium\Install-ChromeDriver.ps1
     shell: pwsh

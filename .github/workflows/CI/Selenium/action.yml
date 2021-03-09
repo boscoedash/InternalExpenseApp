@@ -5,41 +5,12 @@ runs:
   steps: 
   - name: Install dependencies
     run: |
-      python -m pip install --upgrade pip
-      pip install -r Selenium/requirements.txt
-    shell: bash
-  - name: Install SeleniumBase
-    run: |
-      python Selenium/setup.py install
-    shell: bash
-  - name: Lint with flake8
-    run: |
-      pip install flake8
-      # Stop the build if there are flake8 issues
-      flake8 . --count --show-source --statistics --exclude=temp
-    shell: bash
-  - name: Install Chrome and Firefox
-    run: |
-      sudo apt install google-chrome-stable
-      sudo apt-get install firefox
-    shell: bash
-  - name: Check the console scripts interface
-    run: |
-      seleniumbase
-      sbase
-    shell: bash
-  - name: Install chromedriver and geckodriver (Firefox Webdriver)
-    run: |
-      seleniumbase install chromedriver
-      seleniumbase install geckodriver
-    shell: bash
-  - name: Make sure pytest is working
-    run: |
-      echo "def test_1(): pass" > nothing.py
-      pytest nothing.py
-    shell: bash
-  - name: Make sure nosetests is working
-    run: |
-      echo "def test_2(): pass" > nothing2.py
-      nosetests nothing2.py
-    shell: bash
+      $path = $PSScriptRoot
+      while ((Split-Path -Path $path -Leaf) -ne '.github')
+      {
+          $path = Split-Path -Path $path -Parent
+      }
+      $root = Split-Path -Path $path -Parent
+      write-host $path
+      .\Selenium\Install-ChromeDriver.ps1
+    shell: pwsh

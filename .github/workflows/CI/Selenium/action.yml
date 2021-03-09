@@ -9,7 +9,7 @@ runs:
   steps: 
   - name: Install dependencies
     run: |
-      get-childitem -path ..\..\..\
+      get-childitem -path ..\
       #$path = ..\..\..\..\Selenium\Install-ChromeDriver.ps1
       #Invoke-Command -Path $path
     shell: pwsh

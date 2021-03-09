@@ -9,5 +9,6 @@ runs:
   steps: 
   - name: Install dependencies
     run: |
-      ..\..\..\..\Selenium\Install-ChromeDriver.ps1
+      get-childitem -path ..\..\..\..\Selenium
+      #..\..\..\..\Selenium\Install-ChromeDriver.ps1
     shell: pwsh

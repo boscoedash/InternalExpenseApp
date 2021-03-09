@@ -9,5 +9,5 @@ runs:
   steps: 
   - name: Install dependencies
     run: |
-      ${{ inputs.SeleniumRoot }}\Install-ChromeDriver.ps1
+      ${{ inputs.SeleniumRoot }}/Install-ChromeDriver.ps1
     shell: pwsh

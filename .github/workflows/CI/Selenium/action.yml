@@ -5,5 +5,5 @@ runs:
   steps: 
   - name: Install dependencies
     run: |
-      .\$GITHUB_WORKSPACE\Selenium\Install-ChromeDriver.ps1
+      $GITHUB_WORKSPACE\Selenium\Install-ChromeDriver.ps1
     shell: pwsh

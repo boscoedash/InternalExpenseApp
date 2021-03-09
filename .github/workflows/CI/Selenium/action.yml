@@ -1,9 +1,13 @@
 name: "Selenium"
 description: "Selenium Tests"
+inputs:
+  SeleniumRoot:
+    description: 'Selenium Root Folder'
+    required: yes
 runs:
   using: "composite"
   steps: 
   - name: Install dependencies
     run: |
-      $GITHUB_WORKSPACE\Selenium\Install-ChromeDriver.ps1
+      ${SeleniumRoot}\Install-ChromeDriver.ps1
     shell: pwsh

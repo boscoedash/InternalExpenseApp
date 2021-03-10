@@ -12,7 +12,7 @@ param
 (
     [Parameter()]
     [string]
-    $DriverVersion = '86.0.4240.22',
+    $DriverVersion = '89.0.4389.23',
 
     [Parameter()]
     [string]

@@ -92,3 +92,4 @@ C:\Repositories\InternalExpenseApp\Source\SeleniumProject\SeleniumProject\obj\De
 C:\Repositories\InternalExpenseApp\Source\SeleniumProject\SeleniumProject\obj\Debug\netcoreapp3.1\SeleniumProject.dll
 C:\Repositories\InternalExpenseApp\Source\SeleniumProject\SeleniumProject\obj\Debug\netcoreapp3.1\SeleniumProject.pdb
 C:\Repositories\InternalExpenseApp\Source\SeleniumProject\SeleniumProject\obj\Debug\netcoreapp3.1\SeleniumProject.genruntimeconfig.cache
+C:\Repositories\InternalExpenseApp\Source\SeleniumProject\SeleniumProject\obj\Debug\netcoreapp3.1\SeleniumProject.csprojAssemblyReference.cache

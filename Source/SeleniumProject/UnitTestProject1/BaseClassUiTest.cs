@@ -38,7 +38,7 @@ namespace UnitTestProject1
             _theHost = new Uri(Driver.Url).GetLeftPart(UriPartial.Authority);
         }
 
-        [ClassCleanup]
+        [ClassCleanup(InheritanceBehavior.BeforeEachDerivedClass)]
         public static void BrowserCleanup()
         {
             if (Driver != null)

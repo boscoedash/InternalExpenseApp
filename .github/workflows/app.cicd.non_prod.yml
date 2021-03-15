@@ -45,6 +45,12 @@ jobs:
       uses: actions/checkout@v2
       with: 
         ref: 'develop'
+    - name: Build
+      run: |
+        dotnet clean ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
+        dotnet restore ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
+        dotnet build ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
+      shell: pwsh
     - name: "DeployWebToNonProduction"
       uses: azure/webapps-deploy@v2
       with: 

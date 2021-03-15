@@ -20,7 +20,7 @@ namespace UnitTestProject1
         {
             var pageTitle = Driver.FindElements(By.TagName("h2")).FirstOrDefault().Text;
             //Assert 
-            Assert.AreEqual(pageTitle, "Expenses");
+            Assert.AreEqual(pageTitle, "Expenss");
         }
 
         

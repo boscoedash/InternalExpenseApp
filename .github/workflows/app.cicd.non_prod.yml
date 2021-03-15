@@ -8,7 +8,8 @@ on:
   push:
     branches: [ develop ]
     paths:
-      - Source/*
+      - Source/Contoso.Expenses.Web/*
+      # - Source/Tests/Selenium/SeleniumTests/SeleniumTests/*
       - .github/workflows/app.cicd.non_prod.yml
       - .github/workflows/CI/*
       - .github/workflows/Compile/*

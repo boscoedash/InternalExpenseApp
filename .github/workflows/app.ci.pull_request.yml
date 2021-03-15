@@ -9,6 +9,7 @@ on:
     branches: [ develop, master ]
     paths:
       - Source/*
+      - Source/Tests/Selenium/SeleniumTests/SeleniumTests/*
       - .github/workflows/app.ci.pull_request.yml
 
   # Allows you to run this workflow manually from the Actions tab

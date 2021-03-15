@@ -26,9 +26,9 @@ namespace UnitTestProject1
         [TestMethod]
         public void Title_ShouldBeExpenses_Fail()
         {
-            var pageTitle = Driver.FindElements(By.TagName("h2")).FirstOrDefault().Text;
+            var pageTitle = Driver.FindElements(By.TagName("li")).FirstOrDefault().Text;
             //Assert 
-            Assert.AreEqual(pageTitle, "Not Expenses");
+            Assert.AreEqual(pageTitle, "Register");
         }
     }
 }

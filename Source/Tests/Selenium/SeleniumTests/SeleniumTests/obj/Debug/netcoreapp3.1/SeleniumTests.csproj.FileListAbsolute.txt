@@ -85,6 +85,7 @@ C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumT
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.csprojAssemblyReference.cache
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.AssemblyInfoInputs.cache
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.AssemblyInfo.cs
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.csproj.CoreCompileInputs.cache
@@ -92,4 +93,3 @@ C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumT
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.dll
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.pdb
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.genruntimeconfig.cache
-C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.csprojAssemblyReference.cache

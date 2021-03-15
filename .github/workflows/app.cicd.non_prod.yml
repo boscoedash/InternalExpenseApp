@@ -22,7 +22,7 @@ on:
 jobs:
 
   ContinuousIntegration_Testing:
-    name: "AutomatedTests"
+    name: "CITests"
     runs-on: windows-latest
     steps:
     - name: "Checkout"
@@ -42,7 +42,7 @@ jobs:
 
   ContinuousDeployment_Deploy:
     name: "Deploy"
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     environment: "Non-Production"
     needs: ContinuousIntegration_Testing
     steps:

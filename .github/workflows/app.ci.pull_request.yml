@@ -18,7 +18,7 @@ on:
 jobs:
 
   ContinuousIntegration_Testing:
-    name: "AutomatedTests"
+    name: "CITests"
     runs-on: windows-latest
     steps:
     - name: "Checkout"

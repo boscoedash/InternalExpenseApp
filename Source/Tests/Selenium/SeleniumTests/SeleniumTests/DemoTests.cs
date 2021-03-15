@@ -24,7 +24,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void Title_ShouldBeExpenses_Fail()
+        public void Link_RegisterLinkShouldNavigateToRegisterPage()
         {
             var pageTitle = Driver.FindElements(By.TagName("li")).FirstOrDefault().Text;
             //Assert 

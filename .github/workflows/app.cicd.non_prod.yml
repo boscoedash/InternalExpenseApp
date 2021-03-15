@@ -28,42 +28,12 @@ jobs:
       uses: actions/checkout@v2
       with: 
         ref: 'develop'
-    - name: "Lint"
-      uses: ./.github/workflows/CI/linters
     - name: "UnitTests"
       uses: ./.github/workflows/CI/unit
     - name: "SeleniumTests"
       uses: ./.github/workflows/CI/Selenium
       with:
-        SeleniumRoot: "$GITHUB_WORKSPACE/Selenium"
-
-# ContinuousIntegration_Compile:
-#     name: "Compile"
-#     runs-on: ubuntu-latest
-#     needs: ContinuousIntegration_Testing
-#     steps:
-#       - name: "Checkout"
-#         uses: actions/checkout@v2
-#         with: 
-#           ref: 'develop'
-#       - name: "Compile"
-#         uses: ./.github/workflows/Compile
-
-# ContinuousDeployment_Deploy:
-#     name: "Deploy"
-#     runs-on: ubuntu-latest
-#     environment: "Non-Production"
-#     needs: ContinuousIntegration_Compile
-#     steps:
-#       - name: "Checkout"
-#         uses: actions/checkout@v2
-#         with: 
-#           ref: 'develop'
-#       - name: "Publish"
-#         uses: ./.github/workflows/Publish/non_prod
-#       - name: "Deploy"
-#         uses: ./.github/workflows/Deploy/non_prod
-
+        SeleniumRoot: "$GITHUB_WORKSPACE/Source/Tests/Selenium/"
 
   ContinuousDeployment_Deploy:
     name: "Deploy"
@@ -71,11 +41,6 @@ jobs:
     environment: "Non-Production"
     needs: ContinuousIntegration_Testing
     steps:
-    #  - name: Build and Publish
-    #    run: |
-    #      dotnet restore
-    #      dotnet build --configuration Release
-    #      dotnet publish -c Release -o './Source/Relecloud.Web' 
     - name: "Checkout"
       uses: actions/checkout@v2
       with: 

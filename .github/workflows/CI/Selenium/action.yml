@@ -9,5 +9,10 @@ runs:
   steps: 
   - name: Install dependencies
     run: |
-      .\Selenium\Install-ChromeDriver.ps1
+      ./Source/Tests/Selenium/Install-ChromeDriver.ps1
     shell: pwsh
+  - name: Build
+    run: |
+      dotnet clean ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
+      dotnet build ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
+      dotnet test ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln

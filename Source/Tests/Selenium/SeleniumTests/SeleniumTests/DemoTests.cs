@@ -22,7 +22,5 @@ namespace UnitTestProject1
             //Assert 
             Assert.AreEqual(pageTitle, "Expenss");
         }
-
-        
     }
 }

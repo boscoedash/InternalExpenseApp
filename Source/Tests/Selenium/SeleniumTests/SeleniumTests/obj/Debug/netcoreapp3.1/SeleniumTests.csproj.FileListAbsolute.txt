@@ -92,3 +92,4 @@ C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumT
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.dll
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.pdb
 C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.genruntimeconfig.cache
+C:\Repositories\InternalExpenseApp\Source\Tests\Selenium\SeleniumTests\SeleniumTests\obj\Debug\netcoreapp3.1\SeleniumTests.csprojAssemblyReference.cache

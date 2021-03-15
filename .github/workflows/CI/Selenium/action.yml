@@ -16,4 +16,5 @@ runs:
       dotnet clean ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
       dotnet build ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
       dotnet test ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
+      write-host "Tests have been run"
     shell: pwsh

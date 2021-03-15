@@ -16,3 +16,4 @@ runs:
       dotnet clean ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
       dotnet build ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
       dotnet test ./Source/Tests/Selenium/SeleniumTests/SeleniumTests.sln
+    shell: pwsh

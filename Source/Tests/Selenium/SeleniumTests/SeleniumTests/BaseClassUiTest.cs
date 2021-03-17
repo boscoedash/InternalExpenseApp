@@ -14,7 +14,7 @@ namespace UnitTestProject1
         /// Gets the browser.
         /// </summary>
         /// <value>The browser.</value>
-        public static IWebDriver Driver;
+        public static IWebDriver Driver { get; set; }
         public static string _theHost;
         /// <summary>
         ///Gets or sets the test context which provides
@@ -31,6 +31,7 @@ namespace UnitTestProject1
                 var driverLocation = Environment.GetEnvironmentVariable("ChromeWebDriver", EnvironmentVariableTarget.Machine);
                 ChromeOptions options = new ChromeOptions();
                 options.AddArguments("start-maximized");
+                options.AddArguments("--incognito");
                 Driver = new ChromeDriver(driverLocation, options);
             }
 

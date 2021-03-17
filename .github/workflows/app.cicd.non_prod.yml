@@ -9,7 +9,7 @@ on:
     branches: [ develop ]
     paths:
       - Source/Contoso.Expenses.Web/*
-      # - Source/Tests/Selenium/SeleniumTests/SeleniumTests/*
+      - Source/Tests/Selenium/SeleniumTests/SeleniumTests/*
       - .github/workflows/app.cicd.non_prod.yml
       - .github/workflows/CI/*
       - .github/workflows/Compile/*

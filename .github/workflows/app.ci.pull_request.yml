@@ -11,6 +11,7 @@ on:
       - Source/*
       - Source/Tests/Selenium/SeleniumTests/SeleniumTests/*
       - .github/workflows/app.ci.pull_request.yml
+      - Source/Tests/EasyRepro/*
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,6 +32,8 @@ jobs:
         dotnet-version: '3.1.x'
     - name: "UnitTests"
       uses: ./.github/workflows/CI/unit
+    - name: "EasyReproTests"
+      uses: ./.github/workflows/CI/EasyRepro
     - name: "SeleniumTests"
       uses: ./.github/workflows/CI/Selenium
       with:

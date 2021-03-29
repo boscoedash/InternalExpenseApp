@@ -10,6 +10,7 @@ on:
     paths:
       - Source/Contoso.Expenses.Web/*
       - Source/Tests/Selenium/SeleniumTests/SeleniumTests/*
+      - Source/Tests/EasyRepro/*
       - .github/workflows/app.cicd.non_prod.yml
       - .github/workflows/CI/*
       - .github/workflows/Compile/*
@@ -35,6 +36,8 @@ jobs:
         dotnet-version: '3.1.x'
     - name: "UnitTests"
       uses: ./.github/workflows/CI/unit
+    - name: "EasyReproTests"
+      uses: ./.github/workflows/CI/EasyRepro
     - name: "SeleniumTests"
       uses: ./.github/workflows/CI/Selenium
       with:

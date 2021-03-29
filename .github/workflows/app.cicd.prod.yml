@@ -35,8 +35,6 @@ jobs:
           uses: ./.github/workflows/CI/linters
         - name: "UnitTests"
           uses: ./.github/workflows/CI/unit
-        - name: "IntegrationTests"
-          uses: ./.github/workflows/CI/integration
 
   ContinuousIntegration_Compile:
       name: "Compile"

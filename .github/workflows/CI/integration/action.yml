@@ -1,8 +1,0 @@
-name: "IntegrationTests"
-description: "Place Holder for Integration Tests"
-runs:
-  using: "composite"
-  steps: 
-  - run: |
-      echo "Running Integration Tests"
-    shell: bash

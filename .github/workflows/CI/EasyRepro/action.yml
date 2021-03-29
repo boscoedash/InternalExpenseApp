@@ -1,0 +1,19 @@
+name: "EasyRepro"
+description: "Easy Repro UI Tests"
+inputs:
+  EasyReproRoot:
+    description: 'Easy Repro Root Folder'
+    required: yes
+runs:
+  using: "composite"
+  steps: 
+  - name: Build
+    run: |
+      # dotnet clean ./Source/Tests/EasyRepro/UIAutomation.sln
+      # dotnet restore ./Source/Tests/EasyRepro/UIAutomation.sln
+      dotnet build ./Source/Tests/EasyRepro/UIAutomation.sln
+    shell: pwsh
+  - name: Run Tests
+    run: |
+      dotnet test ./Source/Tests/EasyRepro/UIAutomation.sln
+    shell: pwsh

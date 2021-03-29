@@ -6188,7 +6188,7 @@
   },
   "packageFolders": {
     "C:\\Users\\bhlokana\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6200,7 +6200,7 @@
       "outputPath": "C:\\Repositories\\InternalExpenseApp\\Source\\Tests\\Selenium\\SeleniumTests\\SeleniumTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
         "C:\\Users\\bhlokana\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6270,7 +6270,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -65,7 +65,3 @@ module "AppService" {
   app_service_plan_id     = module.AppServicePlan.id
 }
 
- 
- 
- 
- 

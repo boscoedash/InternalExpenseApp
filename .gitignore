@@ -3,3 +3,4 @@
 
 # User-specific files
 main.tf
+**/Web.config

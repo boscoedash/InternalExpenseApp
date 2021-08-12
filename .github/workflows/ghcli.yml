@@ -15,7 +15,8 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
       - name: GitHub Script
         run: |
-          gh repo clone https://github.com/boscoedash/InternalExpenseApp.git
-          git checkout develop
+          gh pr create --title "The bug is fixed" --body "Everything works again"
+          gh pr create --base master --head develop

@@ -18,4 +18,5 @@ jobs:
 
       - name: GitHub Script
         run: |
-          gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
+          gh repo clone boscoedash/InternalExpenseApp
+          

@@ -18,4 +18,4 @@ jobs:
 
       - name: GitHub Script
         run: |
-          gh auth login 
+          gh auth login --with-token ${{ secrets.GH_CLI_TOKEN }}

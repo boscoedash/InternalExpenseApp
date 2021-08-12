@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: githubAPI
+name: githubCLITesting
 
 # Controls when the workflow will run
 on:
@@ -20,4 +20,5 @@ jobs:
 
       - name: GitHub Script
         run: |
-          gh --help
+          gh repo clone https://github.com/boscoedash/InternalExpenseApp.git
+          git checkout develop

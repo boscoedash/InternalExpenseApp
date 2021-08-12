@@ -18,6 +18,4 @@ jobs:
 
       - name: GitHub Script
         run: |
-          gh auth login --with-token ${{ secrets.GH_CLI_TOKEN }}
-          gh pr create --title "The bug is fixed" --body "Everything works again"
-          gh pr create --base master --head develop
+          gh auth login 

@@ -20,4 +20,4 @@ jobs:
 
       - name: GitHub Script
         run: |
-          gh auth login --with-token ${{ secrets.GH_CLI_TOKEN }}
+          gh api -X POST repos/boscoedash/InternalExpenseApp/pulls -F head="develop" -F base="master" -F title="Test PR" -F body="some text for testing"

@@ -5,6 +5,8 @@ name: githubCLITesting
 # Controls when the workflow will run
 on:
   workflow_dispatch:
+  
+permissions: write-all
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,4 +20,4 @@ jobs:
 
       - name: GitHub Script
         run: |
-          gh auth login --with-token ${{ secrets.GITHUB_TOKEN }}
+          gh auth login --with-token ${{ secrets.GH_CLI_TOKEN }}

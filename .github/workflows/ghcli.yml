@@ -19,4 +19,8 @@ jobs:
       - name: GitHub Script
         run: |
           gh api repo/boscoedash/INternalExpenseApp/pulls
-          
+      - name: GitHub Script
+        uses: actions/github-script@v4.0.2
+        with:
+          # The script to run
+          script: |

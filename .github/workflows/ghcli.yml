@@ -18,10 +18,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
           
-      - name: GitHub Script
-        uses: actions/github-script@v4.0.2
-        with:
-          # The script to run
-          script: 
-            gh api -X POST repos/boscoedash/InternalExpenseApp/pulls -F head="develop" -F base="master" -F title="Test PR" -F body="some text for testing"
+      - name: GitHub API
+        run: |
+          curl -X POST -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/boscoedash/InternalExpenseApp/pulls -d '{"head":"develop","base":"master"}'
+
     

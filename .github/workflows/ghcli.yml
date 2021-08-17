@@ -29,5 +29,3 @@ jobs:
           # The script to run
           script: |
             gh auth login --with-token
-          github-token: ${{ secrets.GH_TOKEN }}
-          debug: true

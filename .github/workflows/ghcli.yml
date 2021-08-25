@@ -25,4 +25,4 @@ jobs:
     
       - name: Test Variable
         run: |
-          echo "This is the value: ${{ env.action_state }}
+          echo "This is the value: ${{ env.action_state }}"

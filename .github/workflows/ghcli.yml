@@ -18,11 +18,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-          
-      - name: Output Variable
+      - name: Set the value
+        id: step_one
         run: |
           echo "action_state=yellow" >> $GITHUB_ENV
-    
-      - name: Test Variable
+      - name: Use the value
+        id: step_two
         run: |
-          echo "This is the value: ${{ env.action_state }}"
+          echo "${{ env.action_state }}" # This will output 'yellow'

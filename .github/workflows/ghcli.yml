@@ -21,8 +21,8 @@ jobs:
           
       - name: Output Variable
         run: |
-          echo "::set-env name=flag::asoufh"
+          echo "action_state=yellow" >> $GITHUB_ENV
     
       - name: Test Variable
         run: |
-          echo "This is the value: ${{ env.flag }}
+          echo "This is the value: ${{ env.action_state }}

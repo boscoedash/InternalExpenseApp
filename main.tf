@@ -64,3 +64,7 @@ module "AppService" {
   resource_group_name     = var.resource_group_name
   app_service_plan_id     = module.AppServicePlan.id
 }
+
+ 
+ 
+ 
